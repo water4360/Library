@@ -27,12 +27,13 @@ public class AllBooksUI extends BaseUI {
 			System.out.println("\t관리중인 도서가 없습니다");
 		} else {
 			for(BookVO book : bookList) {
-				System.out.printf("%d\t%s\t\t%s\t%s\t%d\n"
-									, book.getManageNo()
-									, book.getTitle()
-									, book.getAuthor()
-									, book.getPublisher()
-									, book.getStock());
+				System.out.print(book);
+//				System.out.printf("%d\t%-25s\t\t%s\t%s\t%d\n"
+//									, book.getManageNo()
+//									, book.getTitle()
+//									, book.getAuthor()
+//									, book.getPublisher()
+//									, book.getStock());
 			}
 		}
 	}

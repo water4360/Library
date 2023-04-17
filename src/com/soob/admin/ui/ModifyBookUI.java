@@ -17,7 +17,7 @@ public class ModifyBookUI extends BaseUI {
 		
 //		String title = scanStr("수정할 도서명을 입력하세요 : ");
 		int searchNo = scanInt("수정할 도서의 관리번호를 입력하세요 : ");
-		BookVO book = service.modifyByNo(searchNo);
+		BookVO book = service.searchOneByNo(searchNo);
 		
 		System.out.println("-".repeat(70));
 		if(book != null) {

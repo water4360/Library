@@ -33,7 +33,7 @@ public class BookDAO {
 			pstmt.setString(3, book.getPublisher());
 			pstmt.setInt(4, book.getStock());
 			
-			int cnt = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,7 +46,7 @@ public class BookDAO {
 		List<BookVO> bookList = new ArrayList<>();
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT * FROM BOOKLIST ");
+		sql.append("SELECT * FROM BOOKLIST ORDER BY NO");
 		
 		try(
 				Connection conn = new ConnectionFactory().getConnection();
@@ -76,7 +76,7 @@ public class BookDAO {
 	}
 
 	//3. 일단은 관리번호로 검색하면 찾아지는 + 수정할 수 있는.
-	public BookVO modifyBook(int manageNo) {
+	public BookVO searchOneBook(int manageNo) {
 		
 		BookVO book = null;
 		
@@ -126,6 +126,7 @@ public class BookDAO {
 			pstmt.setInt(1, manageNo);
 			
 			int cnt = pstmt.executeUpdate();
+//			System.out.println("반영완료" + cnt);
 			
 //			if(rs.next()) {
 //				int no 			= rs.getInt("NO");

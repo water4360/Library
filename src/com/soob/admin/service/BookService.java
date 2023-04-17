@@ -29,8 +29,8 @@ public class BookService {
 	}
 
 	//3. 번호로 찾아서 보여주는 메소드(일단 단일)
-	public BookVO modifyByNo(int manageNo) {
-		BookVO book = bookDao.modifyBook(manageNo);
+	public BookVO searchOneByNo(int manageNo) {
+		BookVO book = bookDao.searchOneBook(manageNo);
 		return book;
 	}
 	

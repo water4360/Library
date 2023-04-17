@@ -28,11 +28,12 @@ public class RegisterUI extends BaseUI {
 		book.setPublisher(publisher);
 		book.setStock(stock);
 		
-		System.out.println(">> 신규 도서 등록을 완료하였습니다.");
 		bookService.addBook(book);
-		
-		//등록한 도서 보여줌
+		System.out.println("-".repeat(70));
+		System.out.println("관리번호\t\t\t도 서 명\t\t\t저  자\t출판사\t재고");
+		System.out.println("-".repeat(70));
 		System.out.println(book);
+		System.out.println(">> 신규 도서 등록을 완료하였습니다.");
 	}
 
 }

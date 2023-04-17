@@ -59,8 +59,16 @@ public class BookVO {
 	
 	@Override
 	public String toString() {
-		return "BookVO [manageNo=" + manageNo + ", title=" + title + ", author=" + author + ", publisher=" + publisher
-				+ ", stock=" + stock + "]";
+//		System.out.println("-".repeat(70));
+//		System.out.println("관리번호\t\t\t도 서 명\t\t\t저  자\t출판사\t재고");
+		System.out.printf("%d\t%-25s\t\t%s\t%s\t%d\n"
+				, manageNo
+				, title
+				, author
+				, publisher
+				, stock);
+//		System.out.println("-".repeat(70));
+		return "";
 	}
 	
 	
