@@ -1,0 +1,75 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 화요일-4월-18-2023   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table BOOKLIST
+--------------------------------------------------------
+
+  CREATE TABLE "HR"."BOOKLIST" 
+   (	"NO" VARCHAR2(10 BYTE), 
+	"TITLE" VARCHAR2(100 BYTE), 
+	"AUTHOR" VARCHAR2(50 BYTE), 
+	"PUBLISHER" VARCHAR2(50 BYTE), 
+	"STOCK" NUMBER(10,0) DEFAULT 1
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table BOOKLIST
+--------------------------------------------------------
+
+  CREATE TABLE "HR"."BOOKLIST" 
+   (	"NO" VARCHAR2(10 BYTE), 
+	"TITLE" VARCHAR2(100 BYTE), 
+	"AUTHOR" VARCHAR2(50 BYTE), 
+	"PUBLISHER" VARCHAR2(50 BYTE), 
+	"STOCK" NUMBER(10,0) DEFAULT 1
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+REM INSERTING into HR.BOOKLIST
+SET DEFINE OFF;
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230007','웜스9999','웜9','베럴',3);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230009','우리가 빛의 속도로 갈 수 없다는 사실을 미처 알','김두','윰',3);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230011','아마도','그런','일은',3);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230012','우리가 빛의 속도로 갈 수 있나?','김초연','밤',3);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230013','우리가 빛의 속도로 갈 수 있나요?','김초엽','세상',3);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230014','우리가 빛의 속도로 갈 수도 있을까?','김초엽','3',2);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230015','우리가 빛의 속도로 갈 수도 있지?','김초','엄',3);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230002','우리의 바다','김초엽','문학세상',3);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230003','우리가 빛의 속도로 갈 수 없다면','김초엽','판타미러',2);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230016','우리가 빛의 속도로 갈 수도 있겠찌','아마도','그럼',3);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230001','aaa','aaa','a',3);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230006','우리가 빛의 속도로 갈 수 없다는 사실을 미처','김초','문과',3);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230010','우리가 빛의 속도로 갈 수 있다는 사실도','여은','강과바다',3);
+Insert into HR.BOOKLIST (NO,TITLE,AUTHOR,PUBLISHER,STOCK) values ('230017','바람과 물의 바다','자연','자연세상',3);
+--------------------------------------------------------
+--  DDL for Index SYS_C009575
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "HR"."SYS_C009575" ON "HR"."BOOKLIST" ("NO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table BOOKLIST
+--------------------------------------------------------
+
+  ALTER TABLE "HR"."BOOKLIST" MODIFY ("TITLE" NOT NULL ENABLE);
+  ALTER TABLE "HR"."BOOKLIST" MODIFY ("AUTHOR" NOT NULL ENABLE);
+  ALTER TABLE "HR"."BOOKLIST" ADD PRIMARY KEY ("NO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
