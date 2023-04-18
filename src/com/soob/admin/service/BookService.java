@@ -12,6 +12,7 @@ public class BookService {
 	//공통된 테이블에서 유지되는 데이터를 가져오기 위해서임
 	private BookDAO bookDao;
 	
+	
 	public BookService() {
 			bookDao = new BookDAO();
 	}
@@ -37,6 +38,12 @@ public class BookService {
 	//4. 번호로 찾아서 삭제하는 메소드
 	public BookVO deleteByNo(int manageNo) {
 		BookVO book = bookDao.deleteBook(manageNo);
+		return book;
+	}
+	
+	//5. 번호로 찾아서 수정하는 메소드
+	public BookVO modifyTitle(int manageNo, String str) {
+		BookVO book = bookDao.modifyTitle(manageNo, str);
 		return book;
 	}
 	

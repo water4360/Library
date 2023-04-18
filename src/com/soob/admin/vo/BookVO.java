@@ -2,12 +2,13 @@ package com.soob.admin.vo;
 
 public class BookVO {
 
-	//관리번호, 도서명, 저자, 출판사, 보유권수
+	//관리번호, 도서명, 저자, 출판사, 보유권수, 대여상태
 	private int manageNo;
 	private String title;
 	private String author;
 	private String publisher;
 	private int stock;
+	private int status; // 0:재고없음(전부대여중), 1:예약중, 5:대여가능 
 	
 	
 	public BookVO() {
@@ -15,13 +16,14 @@ public class BookVO {
 	}
 	
 	
-	public BookVO(int manageNo, String title, String author, String publisher, int stock) {
+	public BookVO(int manageNo, String title, String author, String publisher, int stock, int status) {
 		super();
 		this.manageNo = manageNo;
 		this.title = title;
 		this.author = author;
 		this.publisher = publisher;
 		this.stock = stock;
+		this.status = status;
 	}
 	
 	
@@ -55,19 +57,32 @@ public class BookVO {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	
-	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+
 	@Override
 	public String toString() {
 //		System.out.println("-".repeat(70));
 //		System.out.println("관리번호\t\t\t도 서 명\t\t\t저  자\t출판사\t재고");
-		System.out.printf("%d\t%-25s\t\t%s\t%s\t%d\n"
+//		System.out.printf("%d\t%-25s\t\t%s\t%s\t%d\n"
+//				, manageNo
+//				, title
+//				, author
+//				, publisher
+//				, stock);
+		//제목을 맨 뒤로 가게 순서를 바꿔???
+		System.out.printf("%d\t%-25s\t\t%s\t%s\t%d\t%s\n"
 				, manageNo
 				, title
 				, author
 				, publisher
-				, stock);
-//		System.out.println("-".repeat(70));
+				, stock
+				, status);
 		return "";
 	}
 	

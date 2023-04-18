@@ -32,6 +32,7 @@ public class BookDAO {
 			pstmt.setString(2, book.getAuthor());
 			pstmt.setString(3, book.getPublisher());
 			pstmt.setInt(4, book.getStock());
+//			pstmt.setInt(5, book.getStatus());
 			
 			pstmt.executeUpdate();
 			
@@ -61,8 +62,9 @@ public class BookDAO {
 				String author	= rs.getString("AUTHOR");
 				String publisher= rs.getString("PUBLISHER");
 				int stock 		= rs.getInt("STOCK");
+				int status 		= rs.getInt("STATUS");
 				
-				BookVO book = new BookVO(no, title, author, publisher, stock);
+				BookVO book = new BookVO(no, title, author, publisher, stock, status);
 
 //				System.out.println(book);
 				bookList.add(book);
@@ -98,8 +100,9 @@ public class BookDAO {
 				String author	= rs.getString("AUTHOR");
 				String publisher= rs.getString("PUBLISHER");
 				int stock 		= rs.getInt("STOCK");
+				int status 		= rs.getInt("STATUS");
 				
-				book = new BookVO(no, title, author, publisher, stock);
+				book = new BookVO(no, title, author, publisher, stock, status);
 			}
 			
 		} catch (Exception e) {
@@ -107,7 +110,8 @@ public class BookDAO {
 		}
 		
 		return book;
-	}
+	}	
+	
 
 	//4. 관리번호로 찾아서 삭제하는
 	public BookVO deleteBook(int manageNo) {
@@ -122,27 +126,38 @@ public class BookDAO {
 			Connection conn = new ConnectionFactory().getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 		) {
-			//물음표 자리에 매개변수로 들어오는 int를 날려~
 			pstmt.setInt(1, manageNo);
 			
 			int cnt = pstmt.executeUpdate();
-//			System.out.println("반영완료" + cnt);
-			
-//			if(rs.next()) {
-//				int no 			= rs.getInt("NO");
-//				String title	= rs.getString("TITLE");
-//				String author	= rs.getString("AUTHOR");
-//				String publisher= rs.getString("PUBLISHER");
-//				int stock 		= rs.getInt("STOCK");
-//				
-//				book = new BookVO(no, title, author, publisher, stock);
-//			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return book;
 		
+	}
+	
+	//4. 타이틀 수정하는 쿼리
+	public BookVO modifyTitle(int manageNo, String str) {
+		BookVO book = null;
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE BOOKLIST SET TITLE = ? ");
+		sql.append(" WHERE NO = ? ");
+		
+		try(
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		) {
+			pstmt.setString(1, str);
+			pstmt.setInt(2, manageNo);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return book;
 	}
 	
 	

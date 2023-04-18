@@ -3,6 +3,7 @@ package com.soob.admin.ui;
 import com.soob.admin.service.BookService;
 import com.soob.admin.service.BookServiceFactory;
 import com.soob.admin.vo.BookVO;
+import com.soob.util.PrintService;
 
 public class RegisterUI extends BaseUI {
 
@@ -17,10 +18,14 @@ public class RegisterUI extends BaseUI {
 	@Override
 	public void run() throws Exception {
 
-		String title = scanStr("도서명을 입력하세요 : ");
-		String author = scanStr("저자명을 입력하세요 : ");
-		String publisher = scanStr("출판사명을 입력하세요 : ");
-		int stock = scanInt("입고 수량을 입력하세요 : ");
+		String title = scanStr("도서명을 입력하세요 >> ");
+		String author = scanStr("저자명을 입력하세요 >> ");
+		String publisher = scanStr("출판사명을 입력하세요 >> ");
+		int stock = scanInt("입고 수량을 입력하세요 (취소:0) >> ");
+		if(stock == 0) {
+			System.out.println("신규도서 등록을 취소하고 초기메뉴로 돌아갑니다.");
+			return;
+		}
 		
 		BookVO book = new BookVO();
 		book.setTitle(title);
@@ -29,11 +34,11 @@ public class RegisterUI extends BaseUI {
 		book.setStock(stock);
 		
 		bookService.addBook(book);
-		System.out.println("-".repeat(70));
-		System.out.println("관리번호\t\t\t도 서 명\t\t\t저  자\t출판사\t재고");
-		System.out.println("-".repeat(70));
-		System.out.println(book);
-		System.out.println(">> 신규 도서 등록을 완료하였습니다.");
+		
+		new PrintService().printTop();
+		System.out.print(book);
+		new PrintService().printBottom();
+		System.out.println("::신규 도서 등록을 완료하였습니다");
 	}
 
 }
