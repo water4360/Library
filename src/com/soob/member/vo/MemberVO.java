@@ -75,7 +75,7 @@ public class MemberVO {
 	}
 	@Override
 	public String toString() {
-		System.out.printf("ID : %s, PW : %s, 이름 : %s, 연락처 : %d",
+		System.out.printf("ID : %s, PW : %s, 이름 : %s, 연락처 : %s",
 							id, pw, userName, userPhone);
 		return "";
 	}

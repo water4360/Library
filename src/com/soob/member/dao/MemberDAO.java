@@ -2,10 +2,12 @@ package com.soob.member.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 import com.soob.member.vo.MemberVO;
 import com.soob.util.ConnectionFactory;
+
 
 /**
  * 오라클 DB의 Book테이블이 CRUD하는 DAO 클래스
@@ -15,20 +17,26 @@ import com.soob.util.ConnectionFactory;
 
 
 public class MemberDAO {
-
-	//1. DB 에 정보를 추가하는 메소드
-	public void addMember() {
-		StringBuilder sql = new StringBuilder();
-		//INSERT INTO MEMBER(MEM_NO, ID, PW, NAME, PHONE, RENTAL_STATUS, RENTAL_NO)
+	//샘플용
+//		INSERT INTO MEMBER(MEM_NO, ID, PW, NAME, PHONE, RENTAL_STATUS, RENTAL_NO)
 //        VALUES(SEQ_MEMBER_NO.NEXTVAL, ?, ?, ?, ?) ;
-		//
-		sql.append("INSERT INTO MEMBER(MEM_NO, ID, PW, NAME, PHONE, RENTAL_STATUS, RENTAL_NO) ");
+
+	
+	
+	//1. DB에 회원정보 추가하는 메소드
+	public void addMember(MemberVO mem) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("INSERT INTO MEMBER(MEM_NO, ID, PW, NAME, PHONE) ");
 		sql.append("			VALUES(SEQ_MEMBER_NO.NEXTVAL, ?, ?, ?, ?) ");
 
 		try(
 				Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 		) {
+			pstmt.setString(1, mem.getId());
+			pstmt.setString(2, mem.getPw());
+			pstmt.setString(3, mem.getUserName());
+			pstmt.setString(4, mem.getUserPhone());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,7 +44,7 @@ public class MemberDAO {
 	}
 	
 	
-//	//1. 저장된 모든 VO리스트를 보여주는 메소드
+//	//1. 저장된 모든 멤버VO리스트를 보여주는 메소드
 //	public List<MemberVO> showAllMembers() {
 //		List<MemberVO> memList = new ArrayList<>();
 //		
@@ -71,91 +79,132 @@ public class MemberDAO {
 //		return bookList;
 //	}
 //
-//	//3. 일단은 관리번호로 검색하면 찾아지는 + 수정할 수 있는.
-//	public BookVO searchOneBook(int manageNo) {
+	//0.회원가입/로그인1단계-ID 중복 검색하는 메소드.
+	public boolean isDuplicatedId(String id) {
+		
+		MemberVO mem = null;
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT INSTR(ID, ?), ID FROM MEMBER ");
+		
+		try(
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		) {
+			
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			//쿼리를 실행하고 결과가 있으면
+			while(rs.next()) {
+				//입력받은 문자와 비교하고 같으면 true
+				if(rs.getString("ID").equalsIgnoreCase(id))
+					return true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//다르면 false 반환
+		return false;
+	}
+	
+	//0. 로그인2단계-ID&PW 둘다일치 확인하는 메소드.
+	public boolean isCorrectInfo(String id, String pw) {
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT * FROM MEMBER WHERE ID = ? AND PW = ? ");
+		
+		try(
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		) {
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			
+			ResultSet rs = pstmt.executeQuery();
+			//쿼리를 실행하고 정보가 둘 다 일치하면
+			while(rs.next()) {
+				if(rs.getString("ID").equalsIgnoreCase(id) && rs.getString("PW").equals(pw))
+					return true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//다르면 false 반환
+		return false;
+	}
+	
+	//0. 로그인2단계-ID&PW 둘다일치 확인하는 메소드.
+	public int getMemberCode(String id, String pw) {
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT ID, PW, MEM_CODE FROM MEMBER WHERE ID = ? "); 
+		sql.append(" AND PW = ? ");
+		
+		try(
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		) {
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			//쿼리를 실행하고 정보가 둘 다 일치하면
+			while(rs.next()) {
+				if((rs.getString("ID").equalsIgnoreCase(id)) 
+							&& (rs.getString("PW").equals(pw)))
+					return rs.getInt("MEM_CODE");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//다르면 false 반환
+		return 0;
+	}
+	
+	
+	
+//	public boolean isDuplicated(int id) {
 //		
-//		BookVO book = null;
+//		MemberVO mem = null;
 //		
 //		StringBuilder sql = new StringBuilder();
-//		sql.append("SELECT * FROM BOOKLIST ");
-//		sql.append(" WHERE NO = ? ");
+//		sql.append("SELECT INSTR(ID, ?), ID FROM MEMBER ");
 //		
 //		try(
 //			Connection conn = new ConnectionFactory().getConnection();
 //			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 //		) {
 //			
-//			pstmt.setInt(1, manageNo);
+//			pstmt.setString(1, id);
 //			ResultSet rs = pstmt.executeQuery();
 //			
-//			if(rs.next()) {
-//				int no 			= rs.getInt("NO");
-//				String title	= rs.getString("TITLE");
-//				String author	= rs.getString("AUTHOR");
-//				String publisher= rs.getString("PUBLISHER");
-//				int stock 		= rs.getInt("STOCK");
-//				int status		= rs.getInt("STATUS");
-//				
-//				book = new BookVO(no, title, author, publisher, stock, status);
-//			}
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return book;
-//	}
-//	//3-2 다중 검색!!!! 2=제목, 3=저자
-//	public List<BookVO> searchBooks(int menu, String str) {
-//		List<BookVO> bookList = new ArrayList<>();
-//		
-//		StringBuilder sql = new StringBuilder();
-////		sql.append("SELECT * FROM BOOKLIST WHERE TITLE LIKE '%?%' ");
-//		switch(menu) {
-//			case 2 : 
-//				sql.append("SELECT * FROM BOOKLIST WHERE INSTR(TITLE, ?) != 0 ");
-//				break;
-//			case 3 :
-//				sql.append("SELECT * FROM BOOKLIST WHERE INSTR(AUTHOR, ?) != 0 ");
-//				break;
-//		}
-//		
-//		try(
-//				Connection conn = new ConnectionFactory().getConnection();
-//				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
-//		) {
-//			pstmt.setString(1, str);
-//			ResultSet rs = pstmt.executeQuery();
-//			
+//			//쿼리를 실행하고 결과가 있으면
 //			while(rs.next()) {
-//				int no 			= rs.getInt("NO");
-//				String title	= rs.getString("TITLE");
-//				String author	= rs.getString("AUTHOR");
-//				String publisher= rs.getString("PUBLISHER");
-//				int stock 		= rs.getInt("STOCK");
-//				int status		= rs.getInt("STATUS");
-//				
-//				BookVO book = new BookVO(no, title, author, publisher, stock, status);
-//				bookList.add(book);
+//				//입력받은 문자와 비교하고 같으면 true
+////				System.out.println("rs.getString(1)의 결과 : " + rs.getString(1));
+////				System.out.println("id.equals(rs.getString(1))의 결과 : " + id.equals(rs.getString(1)));
+//				//
+////				if(rs.getInt(1)!=0 && rs.getString(2).equals(id)) {
+//				if(rs.getString("ID").equalsIgnoreCase(id))
+//					return true;
 //			}
 //			
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-//		
-//		return bookList;
+//		//다르면 false 반환
+//		return false;
 //	}
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//
+
+
+	
+	
+	
 //	//4. 관리번호로 찾아서 삭제하는
 //	public BookVO deleteBook(int manageNo) {
 //		
@@ -192,29 +241,8 @@ public class MemberDAO {
 //		
 //	}
 //	
-//	//4. 타이틀 수정하는 쿼리
-//	public BookVO modifyTitle(int manageNo, String str) {
-//		BookVO book = null;
-//		
-//		StringBuilder sql = new StringBuilder();
-//		sql.append("UPDATE BOOKLIST SET TITLE = ? ");
-//		sql.append(" WHERE NO = ? ");
-//		
-//		try(
-//			Connection conn = new ConnectionFactory().getConnection();
-//			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
-//		) {
-//			pstmt.setString(1, str);
-//			pstmt.setInt(2, manageNo);
-//			
-//			pstmt.executeUpdate();
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return book;
-//	}
-//	
+	
+	
 
 	
 	

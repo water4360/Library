@@ -20,7 +20,7 @@ public class TempSearchBooksUI extends BaseUI {
 	@Override
 	public void run() throws Exception {
 		
-		int menu = scanInt("1.관리번호 2. 도서명 3. 저자명\n"
+		int menu = scanInt("[1]관리번호 [2]도서명 [3]저자명\n"
 							+ "도서 검색 방법을 선택하세요 >> ");
 		String searchWord;
 		List<BookVO> bookList; 
@@ -28,11 +28,12 @@ public class TempSearchBooksUI extends BaseUI {
 		switch(menu) {
 		case 1 : 
 			//도서번호로 검색하는 경우
-			int manageNo = scanInt("검색할 도서의 관리번호를 입력하세요(취소:0) >> ");
+			int manageNo = scanInt("검색할 도서의 관리번호를 입력하세요 [0]취소 >> ");
 			if(manageNo == 0) return;
 			
 			book = service.searchOneByNo(manageNo);
 			
+			//책이 있으면?
 			if(book != null) {
 				new PrintService().printTop();
 				System.out.print(book);
@@ -46,39 +47,47 @@ public class TempSearchBooksUI extends BaseUI {
 			
 		case 2 :
 			//제목으로 검색하는 경우
-			searchWord = scanStr("검색할 도서명을 입력하세요(취소:0) >> ");
-			if(searchWord == "0") return;
-			bookList = service.searchBooks(menu, searchWord);
-			new PrintService().printTop();
-			if(bookList == null || bookList.size() == 0) {
-				System.out.println("\t\t\t\t검색 결과가 없습니다.");
-				run();
+			searchWord = scanStr("검색할 도서명을 입력하세요 [0]취소 >> ");
+			if(searchWord.equals("0")) {
+				return;
 			} else {
-				for(BookVO book : bookList) {
-					
-					System.out.print(book);
+				bookList = service.searchBooks(menu, searchWord);
+			
+				new PrintService().printTop();
+				if(bookList == null || bookList.size() == 0) {
+					System.out.println("\t\t\t\t검색 결과가 없습니다.");
+					run();
+					//책이 있으면?
+				} else {
+					for(BookVO book : bookList) {
+						
+						System.out.print(book);
+					}
 				}
+				new PrintService().printBottom();
 			}
-			new PrintService().printBottom();
 			break;
 			
 			
 		case 3 :
 			//저자명으로 검색하는 경우
 			searchWord = scanStr("검색할 저자명을 입력하세요(취소:0) >> ");
-			if(searchWord == "0") return;
+			if(searchWord.equals("0")) return;
+			
 			bookList = service.searchBooks(menu, searchWord);
+			
 			new PrintService().printTop();
 			if(bookList == null || bookList.size() == 0) {
 				System.out.println("\t\t\t\t검색 결과가 없습니다.");
 				run();
+				
 			} else {
 				for(BookVO book : bookList) {
 					
 					System.out.print(book);
 				}
+				new PrintService().printBottom();
 			}
-			new PrintService().printBottom();
 			break;
 		}
 		

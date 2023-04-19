@@ -2,12 +2,16 @@ package com.soob.admin.ui;
 
 import java.util.Scanner;
 
-public class AdminUI extends BaseUI{
+import com.soob.util.PrintService;
 
+public class AdminUI extends BaseUI{
+	
+	PrintService print = new PrintService();
+	
 	public void intro() {
-		System.out.println("-".repeat(70));
-		System.out.println("\t\t\t관리자 모드(도서등록 및 관리)");
-		System.out.println("-".repeat(70));
+		print.printBottom();
+		System.out.println("\t\t\t관리자 페이지(도서등록 및 관리)");
+		print.printBottom();
 	}
 	
 	public int menu() {

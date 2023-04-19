@@ -2,8 +2,6 @@ package com.soob.main.ui;
 
 import java.util.Scanner;
 
-import com.soob.member.ui.MemberJoinUI;
-
 public class MainUI extends BaseUI{
 
 	
@@ -13,7 +11,7 @@ public class MainUI extends BaseUI{
 		System.out.println("2. 도서 검색");
 		System.out.println("3. 회원가입");
 		System.out.println("4. 로그인");
-		System.out.println("0. 도서대여 프로그램 종료");
+		System.out.println("0. 프로그램 종료");
 		System.out.print("메뉴를 선택하세요 >> ");
 		
 		Scanner sc = new Scanner(System.in);
@@ -36,11 +34,11 @@ public class MainUI extends BaseUI{
 				break;
 			case 3 :
 				System.out.println("<회원가입>");
-				ui = new MemberJoinUI();
+				ui = new JoinUI();
 				break;
 			case 4 :
 				System.out.println("<로그인>");
-//				ui = new MemberLoginUI();
+				ui = new LoginUI();
 				break;
 			case 0 : 
 //				System.out.println("<나가기>");
