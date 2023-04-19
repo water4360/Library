@@ -27,12 +27,6 @@ public class AllBooksUI extends BaseUI {
 		} else {
 			for(BookVO book : bookList) {
 				System.out.print(book);
-//				System.out.printf("%d\t%-25s\t\t%s\t%s\t%d\n"
-//									, book.getManageNo()
-//									, book.getTitle()
-//									, book.getAuthor()
-//									, book.getPublisher()
-//									, book.getStock());
 			}
 		}
 		new PrintService().printBottom();

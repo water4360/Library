@@ -15,10 +15,8 @@ public class DeleteBookUI extends BaseUI {
 
 	@Override
 	public void run() throws Exception {
-		BookVO book = null;
 		int manageNo = scanInt("삭제할 도서의 관리번호를 입력하세요 >> ");
-		//맞는지 확인?
-		book = service.searchOneByNo(manageNo);
+		BookVO book = service.searchOneByNo(manageNo);
 		
 		new PrintService().printTop();
 		System.out.print(book);
@@ -32,7 +30,7 @@ public class DeleteBookUI extends BaseUI {
 			//관리번호가 없으면 다시 입력받음.
 			run();
 		}
-		if(answer.equals("Y") || answer.equals("y")) {
+		if(answer.equalsIgnoreCase("Y")) {
 			//관리번호가 맞으면 삭제 진짜로 실행.
 			book = service.deleteByNo(manageNo);
 		} else {

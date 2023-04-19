@@ -2,10 +2,15 @@ package com.soob.admin.ui;
 
 import java.util.Scanner;
 
+import com.soob.admin.service.BookService;
+import com.soob.util.PrintService;
+
 public abstract class BaseUI implements IAdminUI{
 
 	//스캐너 상속용도 + ui들 묶어주기
 	private Scanner sc;
+	protected PrintService p;
+	protected BookService service;
 	
 	public BaseUI() {
 		sc = new Scanner(System.in);

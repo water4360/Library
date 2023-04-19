@@ -2,24 +2,26 @@ package com.soob.admin.ui;
 
 import java.util.Scanner;
 
-import com.soob.util.PrintService;
 
 public class AdminUI extends BaseUI{
 	
-	PrintService print = new PrintService();
-	
 	public void intro() {
-		print.printBottom();
+		p.printBottom();
 		System.out.println("\t\t\t관리자 페이지(도서등록 및 관리)");
-		print.printBottom();
+		p.printBottom();
 	}
 	
 	public int menu() {
 		//관리자 전용메뉴
+		//1~5번 [도서관리]로 묶기
+		//6번 - 전체 회원 검색, 연체 회원 조회
 		System.out.println("1. 신규도서 등록 - 취소 추가하기");
 		System.out.println("2. 기존도서 수정 - 기능추가 중");
 		System.out.println("3. 기존도서 삭제");
 		System.out.println("4. 전체 도서목록 출력 - 출력간격 조정중");
+		System.out.println("5. 희망도서 신청내역 확인");
+		System.out.println("6. 회원 관리");
+		
 		System.out.println("0. 관리자 모드 종료");
 		System.out.print("메뉴를 선택하세요 >> ");
 		
@@ -53,7 +55,6 @@ public class AdminUI extends BaseUI{
 				ui = new AllBooksUI();
 				break;
 			case 0 : 
-//				System.out.println("<나가기>");
 				ui = new ExitUI();
 				break;
 			default :
