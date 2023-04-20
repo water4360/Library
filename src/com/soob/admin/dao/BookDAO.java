@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.soob.admin.vo.BookVO;
+import com.soob.main.vo.BookVO;
 import com.soob.util.ConnectionFactory;
 
 /**
@@ -64,7 +64,7 @@ public class BookDAO {
 				int stock 		= rs.getInt("STOCK");
 				int status 		= rs.getInt("STATUS");
 				
-				BookVO book = new BookVO(no, title, author, publisher, stock, status);
+				BookVO book = new BookVO(no, title, author, publisher, status);
 
 //				System.out.println(book);
 				bookList.add(book);
@@ -102,7 +102,7 @@ public class BookDAO {
 				int stock 		= rs.getInt("STOCK");
 				int status 		= rs.getInt("STATUS");
 				
-				book = new BookVO(no, title, author, publisher, stock, status);
+				book = new BookVO(no, title, author, publisher, status);
 			}
 			
 		} catch (Exception e) {

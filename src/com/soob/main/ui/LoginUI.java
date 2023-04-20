@@ -9,10 +9,12 @@ import com.soob.member.vo.MemberVO;
 public class LoginUI extends BaseUI {
 	
 	private MemberService memService;
-	private MemberVO mem;
+	private MemberUI memUi;
+	private AdminUI adminUi;
 	
 	public LoginUI() {
 		memService = MemberServiceFactory.getInstance();
+		memUi = new MemberUI();
 	}
 	
 	@Override
@@ -33,18 +35,24 @@ public class LoginUI extends BaseUI {
 			retry();
 		} else {
 			System.out.println("로그인 성공!");
-			//관리자는 관리자페이지, 회원은 회원페이지로 진입
+			mem.setId(id);
+			mem.setPw(pw);
+//			System.out.println("확인용 " + mem.getId() + ", " + mem.getPw());
+			
+			
+			//회원코드에 따라
 			switch(memService.getMemberCode(id, pw)) {
+			//회원은 회원페이지로 진입
 			case 1 :
 			default :
-//				new MemberUI().intro();
-				new MemberUI().run();
+				memUi.intro();
+				memUi.run();
 				break;
+			//관리자는 관리자페이지
 			case 9 :
-				new AdminUI().intro();
-				new AdminUI().run();
+				adminUi.intro();
+				adminUi.run();
 				break;
-			
 			}
 //			new MemberUI().run();
 		}
@@ -52,7 +60,7 @@ public class LoginUI extends BaseUI {
 	}
 	
 	public void retry() throws Exception {
-		int answer = scanInt("초기 메뉴로 돌아가려면 [0], 회원가입하려면 [1], 다시 로그인 하려면 [2]\n");
+		int answer = scanInt("초기 메뉴로 [0], 회원가입 [1], 다시 로그인 [2]\n");
 		switch(answer) {
 		case 0 : 
 			new MainUI().run();

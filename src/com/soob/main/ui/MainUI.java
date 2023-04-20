@@ -30,7 +30,7 @@ public class MainUI extends BaseUI{
 				break;
 			case 2 :
 //				System.out.println("<도서 검색>");
-				ui = new TempSearchBooksUI();
+				ui = new TempSearchBookUI();
 				break;
 			case 3 :
 				System.out.println("<회원가입>");

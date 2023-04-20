@@ -1,6 +1,6 @@
 package com.soob.admin.ui;
 
-import com.soob.admin.vo.BookVO;
+import com.soob.main.vo.BookVO;
 
 public interface IModifyQuery {
 

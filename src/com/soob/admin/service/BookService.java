@@ -3,7 +3,7 @@ package com.soob.admin.service;
 import java.util.List;
 
 import com.soob.admin.dao.BookDAO;
-import com.soob.admin.vo.BookVO;
+import com.soob.main.vo.BookVO;
 
 public class BookService {
 

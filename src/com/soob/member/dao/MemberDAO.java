@@ -165,6 +165,44 @@ public class MemberDAO {
 		//다르면 false 반환
 		return 0;
 	}
+
+	//ID로 회원정보 뽑아오기
+	public MemberVO getMemberById(String id) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT ID, NAME, RENTAL_STATUS, RENTAL_NO FROM MEMBER" 
+				+ "WHERE ID = ? ");
+		try(
+				Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+			) {
+				pstmt.setString(1, id);
+				
+				ResultSet rs = pstmt.executeQuery();
+				
+				//ID가 존재하면 쿼리를 실행하고
+				if(rs.next()) {
+					String name = rs.getString("NAME");
+					String rentalStatus = rs.getString("RENTAL_STATUS");
+					
+					
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

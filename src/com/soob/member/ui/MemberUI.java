@@ -2,27 +2,42 @@ package com.soob.member.ui;
 
 import java.util.Scanner;
 
+import com.soob.main.ui.BaseUI;
 import com.soob.main.ui.ExitUI;
 import com.soob.main.ui.IMainUI;
 import com.soob.main.ui.JoinUI;
 import com.soob.main.ui.LoginUI;
 import com.soob.main.ui.TempAllBooksUI;
-import com.soob.main.ui.TempSearchBooksUI;
+import com.soob.main.ui.TempSearchBookUI;
+import com.soob.member.service.MemberServiceFactory;
 import com.soob.util.PrintService;
 
 public class MemberUI extends BaseUI {
-	PrintService print = new PrintService();
+	
+//	PPrintService print = new PrintService();
+	
+	
+	
+	public MemberUI() {
+		memService = MemberServiceFactory.getInstance();
+	}
 	
 	public void intro() {
-		print.printBottom();
-		System.out.println("\t\t\t회원전용 페이지");
-		print.printBottom();
+		p.printBottom();
+		System.out.println("\t\t\t회원전용 페이지 (" + mem.getId() +"님, 이용중)");
+//		System.out.println("여기는 MemberUI, ID = " + mem.getId());
+		p.printBottom();
+	}
+	
+	//LoginUI에서 받아올 메소드
+	public String getId(String id) {
+		return id;
 	}
 	
 	
 	public int menu() {
 		System.out.print("[1]전체 도서목록 보기  ");
-		System.out.print("[2]검색  ");
+		System.out.print("[2]도서 검색  ");
 		System.out.print("[3]대여  ");
 		System.out.print("[4]반납  ");
 		System.out.print("[5]내정보 관리  ");
@@ -45,12 +60,12 @@ public class MemberUI extends BaseUI {
 				ui = new TempAllBooksUI();
 				break;
 			case 2 :
-//				System.out.println("<도서 검색>");
-				ui = new TempSearchBooksUI();
+				System.out.println("<도서 검색>");
+				ui = new TempSearchBookUI(); 
 				break;
 			case 3 :
 				System.out.println("<도서 대여>");
-//				ui = new RentBooksUI();
+				ui = new RentBookUI();
 				break;
 			case 4 :
 				System.out.println("<도서 반납>");

@@ -40,7 +40,7 @@ public class BookDAO {
 				int stock 		= rs.getInt("STOCK");
 				int status 		= rs.getInt("STATUS");
 				
-				BookVO book = new BookVO(no, title, author, publisher, stock, status);
+				BookVO book = new BookVO(no, title, author, publisher, status);
 
 //				System.out.println(book);
 				bookList.add(book);
@@ -53,6 +53,8 @@ public class BookDAO {
 		return bookList;
 	}
 
+	
+	
 	//3. 일단은 관리번호로 검색하면 찾아지는 + 수정할 수 있는.
 	public BookVO searchOneBook(int manageNo) {
 		
@@ -78,7 +80,7 @@ public class BookDAO {
 				int stock 		= rs.getInt("STOCK");
 				int status		= rs.getInt("STATUS");
 				
-				book = new BookVO(no, title, author, publisher, stock, status);
+				book = new BookVO(no, title, author, publisher, status);
 			}
 			
 		} catch (Exception e) {
@@ -117,7 +119,7 @@ public class BookDAO {
 				int stock 		= rs.getInt("STOCK");
 				int status		= rs.getInt("STATUS");
 				
-				BookVO book = new BookVO(no, title, author, publisher, stock, status);
+				BookVO book = new BookVO(no, title, author, publisher, status);
 				bookList.add(book);
 			}
 			
@@ -129,8 +131,61 @@ public class BookDAO {
 	}
 	
 	
+	//도서번호로 도서명 가져오기
+	public String getTitle(int bookNo) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT TITLE FROM BOOKLIST WHERE NO = ?");
+	try(
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		) {
+			pstmt.setInt(1, bookNo);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next())
+				return rs.getString(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
 	
 	
+	//도서번호로 저자명 가져오기
+	public String getAuthor(int bookNo) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT AUTHOR FROM BOOKLIST WHERE NO = ?");
+	try(
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		) {
+			pstmt.setInt(1, bookNo);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next())
+				return rs.getString(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
+	
+	//도서번호로 출판사 가져오기
+	public String getPublisher(int bookNo) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT PUBLISHER FROM BOOKLIST WHERE NO = ?");
+	try(
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		) {
+			pstmt.setInt(1, bookNo);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next())
+				return rs.getString(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
 	
 	
 	
@@ -155,17 +210,6 @@ public class BookDAO {
 			pstmt.setInt(1, manageNo);
 			
 			int cnt = pstmt.executeUpdate();
-//			System.out.println("반영완료" + cnt);
-			
-//			if(rs.next()) {
-//				int no 			= rs.getInt("NO");
-//				String title	= rs.getString("TITLE");
-//				String author	= rs.getString("AUTHOR");
-//				String publisher= rs.getString("PUBLISHER");
-//				int stock 		= rs.getInt("STOCK");
-//				
-//				book = new BookVO(no, title, author, publisher, stock);
-//			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();

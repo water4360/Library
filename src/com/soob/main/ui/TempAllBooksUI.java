@@ -2,9 +2,9 @@ package com.soob.main.ui;
 
 import java.util.List;
 
-import com.soob.admin.service.BookService;
-import com.soob.admin.service.BookServiceFactory;
-import com.soob.admin.vo.BookVO;
+import com.soob.main.service.BookService;
+import com.soob.main.service.BookServiceFactory;
+import com.soob.main.vo.BookVO;
 import com.soob.util.PrintService;
 
 public class TempAllBooksUI extends BaseUI{

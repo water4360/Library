@@ -1,7 +1,7 @@
 package com.soob.admin.ui;
 
 import com.soob.admin.service.BookServiceFactory;
-import com.soob.admin.vo.BookVO;
+import com.soob.main.vo.BookVO;
 
 public class ModifyBookUI extends BaseUI {
 
@@ -30,6 +30,11 @@ public class ModifyBookUI extends BaseUI {
 		}
 		p.printBottom();
 		int selectNo = scanInt("1.도서명 0.수정취소\n수정할 항목을 선택하세요 >> ");
+		
+		if(selectNo!=1 && selectNo!=0) {
+			System.out.println("::잘못입력하셨습니다");
+			run();
+		}
 //		int selectNo = scanInt("1.도서명 2.저자 3.출판사 0.수정취소\n수정할 항목을 선택하세요 >> ");
 //		System.out.print("");
 		
@@ -53,7 +58,7 @@ public class ModifyBookUI extends BaseUI {
 			if(mod != null && selectNo <= 3) {
 				String str = mod.modify(book, searchNo, scanStr("수정할 내용을 입력하세요 >> "));
 				if(str == "") {
-					System.out.println("올바른 수정내용이 아닙니다.");
+					System.out.println("::올바른 수정내용이 아닙니다.");
 					run();
 				}
 				

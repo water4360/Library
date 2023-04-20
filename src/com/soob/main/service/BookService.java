@@ -35,4 +35,14 @@ public class BookService {
 		return bookList;
 	}
 	
+	//도서명,저자명,출판사명
+	public String getTitle(int bookNo) {
+		return bookDao.getTitle(bookNo);
+	}
+	public String getAuthor(int bookNo) {
+		return bookDao.getAuthor(bookNo);
+	}
+	public String getPublisher(int bookNo) {
+		return bookDao.getPublisher(bookNo);
+	}
 }

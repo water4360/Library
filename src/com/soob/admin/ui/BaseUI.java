@@ -14,6 +14,7 @@ public abstract class BaseUI implements IAdminUI{
 	
 	public BaseUI() {
 		sc = new Scanner(System.in);
+		p = new PrintService();
 	}
 	
 	//문자열 입력받기

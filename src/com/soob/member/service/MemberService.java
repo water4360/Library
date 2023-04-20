@@ -17,12 +17,10 @@ public class MemberService {
 			memDao = new MemberDAO();
 	}
 
-	
 	//0. ID 중복 체크 메소드
 	public boolean isDuplicated(String id) {
 		return memDao.isDuplicatedId(id);
 	}
-	
 	
 	//1. 회원 정보를 DB에 추가해주는 메소드
 	public void addMember(MemberVO mem) {
@@ -34,13 +32,15 @@ public class MemberService {
 		return memDao.isCorrectInfo(id, pw);
 	}
 
-
 	//ID,PW로 회원코드 확인
 	public int getMemberCode(String id, String pw) {
 		return memDao.getMemberCode(id, pw);
 	}
-	
-	
+
+	//아이디로 회원정보 찾기
+	public MemberVO getMemberById(String id) {
+		return memDao.getMemberById(id);
+	}
 	
 	//2. 모든 bookList를 보여주는 메소드
 //	public List<MemberVO> showAllBooks() {

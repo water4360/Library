@@ -7,7 +7,6 @@ public class MemberMain {
 	public static void main(String[] args) {
 		
 		try {
-			new MemberUI().intro();
 			new MemberUI().run();
 		} catch (Exception e) {
 			e.printStackTrace();

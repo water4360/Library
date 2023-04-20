@@ -7,13 +7,13 @@ import com.soob.main.service.BookServiceFactory;
 import com.soob.main.vo.BookVO;
 import com.soob.util.PrintService;
 
-public class TempSearchBooksUI extends BaseUI {
+public class TempSearchBookUI extends BaseUI {
 
 	
 	private BookService service;
 	private BookVO book;
 	
-	public TempSearchBooksUI() {
+	public TempSearchBookUI() {
 		service = BookServiceFactory.getInstance();
 	}
 	
@@ -54,13 +54,13 @@ public class TempSearchBooksUI extends BaseUI {
 				bookList = service.searchBooks(menu, searchWord);
 			
 				new PrintService().printTop();
+				
 				if(bookList == null || bookList.size() == 0) {
 					System.out.println("\t\t\t\t검색 결과가 없습니다.");
 					run();
-					//책이 있으면?
+				//책이 있으면?
 				} else {
 					for(BookVO book : bookList) {
-						
 						System.out.print(book);
 					}
 				}
@@ -78,13 +78,18 @@ public class TempSearchBooksUI extends BaseUI {
 			
 			new PrintService().printTop();
 			if(bookList == null || bookList.size() == 0) {
-				System.out.println("\t\t\t\t검색 결과가 없습니다.");
-				run();
+				bookList = service.searchBooks(menu, searchWord);
+			
+				new PrintService().printTop();
 				
-			} else {
-				for(BookVO book : bookList) {
-					
-					System.out.print(book);
+				if(bookList == null || bookList.size() == 0) {
+					System.out.println("\t\t\t\t검색 결과가 없습니다.");
+					run();
+				//책이 있으면?
+				} else {
+					for(BookVO book : bookList) {
+						System.out.print(book);
+					}
 				}
 				new PrintService().printBottom();
 			}

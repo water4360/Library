@@ -2,7 +2,7 @@ package com.soob.admin.ui;
 
 import com.soob.admin.service.BookService;
 import com.soob.admin.service.BookServiceFactory;
-import com.soob.admin.vo.BookVO;
+import com.soob.main.vo.BookVO;
 import com.soob.util.PrintService;
 
 public class RegisterUI extends BaseUI {
@@ -31,7 +31,7 @@ public class RegisterUI extends BaseUI {
 		book.setTitle(title);
 		book.setAuthor(author);
 		book.setPublisher(publisher);
-		book.setStock(stock);
+//		book.setStock(stock);
 		
 		bookService.addBook(book);
 		

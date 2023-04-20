@@ -2,7 +2,7 @@ package com.soob.admin.ui;
 
 import com.soob.admin.service.BookService;
 import com.soob.admin.service.BookServiceFactory;
-import com.soob.admin.vo.BookVO;
+import com.soob.main.vo.BookVO;
 
 public class ModTitle implements IModifyQuery {
 	public BookService service;
