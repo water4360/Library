@@ -2,6 +2,7 @@ package com.soob.admin.ui;
 
 import java.util.Scanner;
 
+import com.soob.main.ui.IMainUI;
 
 public class AdminUI extends BaseUI{
 	
@@ -13,16 +14,15 @@ public class AdminUI extends BaseUI{
 	
 	public int menu() {
 		//관리자 전용메뉴
-		//1~5번 [도서관리]로 묶기
-		//6번 - 전체 회원 검색, 연체 회원 조회
-		System.out.println("1. 신규도서 등록 - 취소 추가하기");
-		System.out.println("2. 기존도서 수정 - 기능추가 중");
+		//1~5번 [도서관리]로 묶을까?
+		System.out.println("1. 신규도서 등록");
+		System.out.println("2. 기존도서 수정");
 		System.out.println("3. 기존도서 삭제");
 		System.out.println("4. 전체 도서목록 출력 - 출력간격 조정중");
 		System.out.println("5. 희망도서 신청내역 확인");
+		//6번 - 전체 회원 검색, 연체 회원 조회
 		System.out.println("6. 회원 관리");
-		
-		System.out.println("0. 관리자 모드 종료");
+		System.out.println("0. 관리자 모드 로그아웃");
 		System.out.print("메뉴를 선택하세요 >> ");
 		
 		Scanner sc = new Scanner(System.in);
@@ -34,7 +34,7 @@ public class AdminUI extends BaseUI{
 	@Override
 	public void run() throws Exception{
 		
-		IAdminUI ui = null; //인터페이스를 구현한 클래스의 객체를 받는 것은 가능
+		IMainUI ui = null; //인터페이스를 구현한 클래스의 객체를 받는 것은 가능
 		
 		while(true) {
 			switch(menu()) {
@@ -64,8 +64,8 @@ public class AdminUI extends BaseUI{
 			if(ui != null) {
 				ui.run();
 			} else {
-//				System.out.println("잘못 입력하셨습니다.");
-				System.out.println("호출된 ui가 없음");
+				System.out.println("잘못 입력하셨습니다.");
+//				System.out.println("호출된 ui가 없음");
 			}
 		}
 		

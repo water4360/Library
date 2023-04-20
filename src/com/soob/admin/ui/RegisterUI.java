@@ -2,6 +2,7 @@ package com.soob.admin.ui;
 
 import com.soob.admin.service.BookService;
 import com.soob.admin.service.BookServiceFactory;
+import com.soob.main.ui.BaseUI;
 import com.soob.main.vo.BookVO;
 import com.soob.util.PrintService;
 
@@ -10,7 +11,6 @@ public class RegisterUI extends BaseUI {
 	private BookService bookService;
 	
 	public RegisterUI() {
-		//일단 만들어놓고 나중에 이 자리에 서비스 호출할...
 		bookService = BookServiceFactory.getInstance();
 	}
 	
@@ -21,8 +21,11 @@ public class RegisterUI extends BaseUI {
 		String title = scanStr("도서명을 입력하세요 >> ");
 		String author = scanStr("저자명을 입력하세요 >> ");
 		String publisher = scanStr("출판사명을 입력하세요 >> ");
-		int stock = scanInt("입고 수량을 입력하세요 (취소:0) >> ");
-		if(stock == 0) {
+		
+		String answer = scanStr("입력하신 정보로 도서를 등록할까요?(Y/N)");
+//		int stock = scanInt("입고 수량을 입력하세요 (취소:0) >> ");
+		
+		if(answer.equalsIgnoreCase("N")) {
 			System.out.println("신규도서 등록을 취소하고 초기메뉴로 돌아갑니다.");
 			return;
 		}

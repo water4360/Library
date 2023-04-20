@@ -31,23 +31,23 @@ public class MemberVO {
 //		this.rentalStatus = rentalStatus;
 //		this.rentalNo = rentalNo;
 	}
-	public int getMemberNo() {
+	public static int getMemberNo() {
 		return memberNo;
 	}
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
+	public static void setMemberNo(int memberNo) {
+		MemberVO.memberNo = memberNo;
 	}
 	public static String getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public static void setId(String id) {
 		MemberVO.id = id;
 	}
-	public String getPw() {
+	public static String getPw() {
 		return pw;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public static void setPw(String pw) {
+		MemberVO.pw = pw;
 	}
 	public static String getUserName() {
 		return userName;

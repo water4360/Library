@@ -20,7 +20,7 @@ public class TempAllBooksUI extends BaseUI{
 	public void run() throws Exception {
 		List<BookVO> bookList = bookService.showAllBooks();
 		
-		new PrintService().printTop();
+		p.printTop();
 		
 		if(bookList == null || bookList.size() == 0) {
 			System.out.println("\t도서 목록이 없습니다.");
@@ -29,7 +29,7 @@ public class TempAllBooksUI extends BaseUI{
 			for(BookVO book : bookList) {
 				System.out.print(book);
 			}
-			new PrintService().printBottom();
+			p.printBottom();
 		}
 		
 		

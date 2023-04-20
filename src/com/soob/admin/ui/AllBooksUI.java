@@ -5,7 +5,6 @@ import java.util.List;
 import com.soob.admin.service.BookService;
 import com.soob.admin.service.BookServiceFactory;
 import com.soob.main.vo.BookVO;
-import com.soob.util.PrintService;
 
 public class AllBooksUI extends BaseUI {
 
@@ -20,7 +19,7 @@ public class AllBooksUI extends BaseUI {
 		
 		List<BookVO> bookList = bookService.showAllBooks();
 		
-		new PrintService().printTop();
+		p.printTop();
 		
 		if(bookList == null || bookList.size() == 0) {
 			System.out.println("\t관리중인 도서가 없습니다");
@@ -29,7 +28,7 @@ public class AllBooksUI extends BaseUI {
 				System.out.print(book);
 			}
 		}
-		new PrintService().printBottom();
+		p.printBottom();
 	}
 
 }

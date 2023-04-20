@@ -10,11 +10,12 @@ import com.soob.main.ui.LoginUI;
 import com.soob.main.ui.TempAllBooksUI;
 import com.soob.main.ui.TempSearchBookUI;
 import com.soob.member.service.MemberServiceFactory;
+import com.soob.member.vo.MemberVO;
 import com.soob.util.PrintService;
 
 public class MemberUI extends BaseUI {
 	
-//	PPrintService print = new PrintService();
+//	PrintService print = new PrintService();
 	
 	
 	
@@ -24,7 +25,7 @@ public class MemberUI extends BaseUI {
 	
 	public void intro() {
 		p.printBottom();
-		System.out.println("\t\t\t회원전용 페이지 (" + mem.getId() +"님, 이용중)");
+		System.out.println("\t\t\t회원전용 페이지 (" + MemberVO.getId() +"님, 이용중)");
 //		System.out.println("여기는 MemberUI, ID = " + mem.getId());
 		p.printBottom();
 	}

@@ -1,6 +1,5 @@
 package com.soob.member.ui;
 
-import com.soob.main.service.BookService;
 import com.soob.main.service.BookServiceFactory;
 import com.soob.main.service.RentalService;
 import com.soob.main.ui.BaseUI;
@@ -8,17 +7,9 @@ import com.soob.main.vo.BookVO;
 import com.soob.main.vo.RentalVO;
 import com.soob.member.vo.MemberVO;
 
-public class RentBookUI extends BaseUI {
+public class ReturnBookUI extends BaseUI {
 
-	private BookService service;
-	private BookVO book;
-	private RentalService renService;
-	
-//	private PrintService p;
-	//아니 BaseUI를 상속받은 앤데 왜 그냥 p만으로 못쓸까?
-	//응 main꺼 상속받았어야지~~
-	
-	public RentBookUI() {
+	public ReturnBookUI() {
 		//서비스들은 같은 DAO를 불러오는 거.
 		service = BookServiceFactory.getInstance();
 		renService = new RentalService();
@@ -27,7 +18,11 @@ public class RentBookUI extends BaseUI {
 	
 	@Override
 	public void run() throws Exception {
-		int bookNo = scanInt("대여할 도서번호를 입력해주세요 >> ");
+		
+		System.out.println("<"+MemberVO.getId()+ "님이 대출중인 도서>");
+		int bookNo = scanInt("반납할 도서를 선택해주세요 >> ");
+		renService.returnBook(bookNo);
+		
 //		System.out.println("현재 접속중인 정보는 ?");
 //		System.out.println("ID : " + mem.getId());
 		
@@ -46,10 +41,10 @@ public class RentBookUI extends BaseUI {
 			if(answer.equalsIgnoreCase("Y")) {
 				//대출불가로 변경
 				book.setManageNo(bookNo);
-				book.setStatus(0);
+				book.setStatus(5);
 				
-				//RENTAL테이블에 대출정보 추가
-				renService.addRental(MemberVO.getId(), bookNo);
+				//RENTAL테이블에서 대출정보 삭제
+				renService.returnBook(MemberVO.getId(), bookNo);
 //				System.out.println("현재 멤버 아이디 : " + MemberVO.getId());
 //				System.out.println("대출 후 book : " + book);
 				

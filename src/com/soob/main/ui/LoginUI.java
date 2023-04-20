@@ -35,8 +35,8 @@ public class LoginUI extends BaseUI {
 			retry();
 		} else {
 			System.out.println("로그인 성공!");
-			mem.setId(id);
-			mem.setPw(pw);
+			MemberVO.setId(id);
+			MemberVO.setPw(pw);
 //			System.out.println("확인용 " + mem.getId() + ", " + mem.getPw());
 			
 			

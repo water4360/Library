@@ -2,10 +2,17 @@ package com.soob.member.ui;
 
 import java.util.Scanner;
 
+import com.soob.main.service.BookService;
+import com.soob.main.service.RentalService;
+import com.soob.main.vo.BookVO;
+
 public abstract class BaseUI implements IMemberUI{
 
 	//스캐너 상속용도 + ui들 묶어주기
 	private Scanner sc;
+	private BookService service;
+	private BookVO book;
+	private RentalService renService;
 	
 	public BaseUI() {
 		sc = new Scanner(System.in);

@@ -16,7 +16,7 @@ public class JoinUI extends BaseUI {
 	}
 	
 	public void intro() {
-		System.out.println("<폴리 라이브러리 회원가입 페이지입니다>");
+		System.out.println("<숲 라이브러리 숲 회원가입 페이지입니다>");
 	}
 	
 	@Override
@@ -31,7 +31,7 @@ public class JoinUI extends BaseUI {
 		pw = checkPw();
 		
 		String userName = scanStr("이름을 입력하세요 예)이하리 >> ");
-		String userPhone = scanStr("폰번호를 입력하세요 예)01012345678 >> ");
+		String userPhone = scanStr("연락처를 입력하세요 예)01012345678 >> ");
 		
 		MemberVO mem = new MemberVO();
 		mem.setId(id);
@@ -45,14 +45,14 @@ public class JoinUI extends BaseUI {
 			
 			memService.addMember(mem);
 			
-			System.out.println("::폴리 라이브러리의 회원이 되신 것을 환영합니다.");
+			System.out.println("::도서관 숲의 회원이 되신 것을 환영합니다.");
 			System.out.println("::"+mem.getUserName()+"님의 독서 생활을 응원할게요!");
 			System.out.println("::로그인 후 이용해주세요.");
 			//바로 로그인 창 소환
-//			new MemberLoginUI().login();
+			new LoginUI().run();
 		} else {
 			System.out.println("::사용자가 가입을 취소했습니다.");
-			run();
+			new MainUI().run();
 		}
 				
 				
@@ -63,10 +63,10 @@ public class JoinUI extends BaseUI {
 
 		//ID 중복이면
 		if(memService.isDuplicated(tempId)) {
-			System.out.println("::[X]이미 사용중인 ID");
+			System.out.println("::이미 사용중인 ID입니다");
 			return tempId=checkId(); //다시 입력받기
 		}
-		System.out.println("::[O]사용할 수 있는 ID");
+		System.out.println("::사용할 수 있는 ID입니다");
 //		System.out.println("아디 : " + tempId);
 		return tempId;
 	}
@@ -78,11 +78,11 @@ public class JoinUI extends BaseUI {
 		
 		//비번 일치 확인되면
 		if(tempPw.equals(checkPw)) {
-			System.out.println("::[O]PW 일치 확인");
+			System.out.println("::PW 일치 확인");
 //			System.out.println("비번 : " + tempPw);
 			return tempPw;
 		}
-		System.out.println("::[X]PW 불일치.");
+		System.out.println("::PW 불일치.");
 		return tempPw = checkPw();
 	}
 
