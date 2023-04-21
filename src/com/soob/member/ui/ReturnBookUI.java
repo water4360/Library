@@ -19,9 +19,14 @@ public class ReturnBookUI extends BaseUI {
 	@Override
 	public void run() throws Exception {
 		
-		System.out.println("<"+MemberVO.getId()+ "님이 대출중인 도서>");
-		int bookNo = scanInt("반납할 도서를 선택해주세요 >> ");
-		renService.returnBook(bookNo);
+		System.out.println("<"+MemberVO.getId()+ "님이 대여중인 도서목록입니다.>");
+//		System.out.println(book);
+		
+		
+		
+		
+		int bookNo = scanInt("반납할 도서번호를 선택해주세요 >> ");
+		renService.returnBook(MemberVO.getId(), bookNo);
 		
 //		System.out.println("현재 접속중인 정보는 ?");
 //		System.out.println("ID : " + mem.getId());
@@ -43,7 +48,7 @@ public class ReturnBookUI extends BaseUI {
 				book.setManageNo(bookNo);
 				book.setStatus(5);
 				
-				//RENTAL테이블에서 대출정보 삭제
+				//RENTAL테이블에서 대출정보 수정
 				renService.returnBook(MemberVO.getId(), bookNo);
 //				System.out.println("현재 멤버 아이디 : " + MemberVO.getId());
 //				System.out.println("대출 후 book : " + book);
