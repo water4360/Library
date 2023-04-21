@@ -1,8 +1,10 @@
 package com.soob.main.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,7 +118,7 @@ public class BookDAO {
 				String title	= rs.getString("TITLE");
 				String author	= rs.getString("AUTHOR");
 				String publisher= rs.getString("PUBLISHER");
-				int stock 		= rs.getInt("STOCK");
+//				int stock 		= rs.getInt("STOCK");
 				int status		= rs.getInt("STATUS");
 				
 				BookVO book = new BookVO(no, title, author, publisher, status);
@@ -240,7 +242,31 @@ public class BookDAO {
 		}
 		return book;
 	}
-	
+
+
+	//대여 또는 반납시 상태코드 변경
+	public void changeStatus(int status, int bookNo) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE BOOKLIST SET STATUS = ? ");
+		sql.append(" WHERE NO = ? ");
+		
+		try(
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		) {
+			pstmt.setInt(1, status);
+			pstmt.setInt(2, bookNo);
+			
+			if(pstmt.executeUpdate()==0) {
+				System.out.println("여기는 BookDAO, changeStatus 반영안됨");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
 
 	
 	

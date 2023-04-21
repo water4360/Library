@@ -24,10 +24,12 @@ public class RentalService {
 		renDao.returnBook(id, bookNo);
 	}
 	
-	//대여목록
-	public List<RentalVO> getRentalBookList(String id) {
-		List<RentalVO> bookList = renDao.getRentalBookList(id);
-		return bookList;
+	//사용자 대여목록 보여주기
+	public List<RentalVO> getRentalList(String id) {
+		List<RentalVO> rentalList = renDao.getRentalList(id);
+		return rentalList;
 	}
+	
+	
 	
 }

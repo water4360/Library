@@ -10,18 +10,16 @@ import com.soob.member.vo.MemberVO;
 
 public class RentBookUI extends BaseUI {
 
-	private BookService service;
+	private BookService bookService;
 	private BookVO book;
 	private RentalService renService;
-	
-//	private PrintService p;
-	//아니 BaseUI를 상속받은 앤데 왜 그냥 p만으로 못쓸까?
-	//응 main꺼 상속받았어야지~~
+	private RentalVO ren;
 	
 	public RentBookUI() {
 		//서비스들은 같은 DAO를 불러오는 거.
-		service = BookServiceFactory.getInstance();
+		bookService = BookServiceFactory.getInstance();
 		renService = new RentalService();
+		ren = new RentalVO();
 	}
 	
 	
@@ -32,41 +30,32 @@ public class RentBookUI extends BaseUI {
 //		System.out.println("ID : " + mem.getId());
 		
 		//관리번호로 책 정보 찾아와서
-		BookVO book = service.searchOneByNo(bookNo);
+		BookVO book = bookService.searchOneByNo(bookNo);
 		
-		//도서가 있고
+		//도서가 있으면
 		if(book != null) {
 			p.printTop();
 			System.out.print(book);
 			p.printBottom();
 			
-			String answer = scanStr("해당 도서가 맞나요? (Y/N)");
-			
-			//맞다고 답하면
-			if(answer.equalsIgnoreCase("Y")) {
-				//대출불가로 변경
-				book.setManageNo(bookNo);
-				book.setStatus(0);
-				
-				//RENTAL테이블에 대출정보 추가
-				renService.addRental(MemberVO.getId(), bookNo);
-//				System.out.println("현재 멤버 아이디 : " + MemberVO.getId());
-//				System.out.println("대출 후 book : " + book);
-				
+			//대출불가인 상태라면
+			if(book.getStatus()==0) {
+				System.out.println("다른 사용자가 대여중인 도서입니다.");
+			} else {
+				String answer = scanStr("해당 도서가 맞나요? (Y/N)");
+				//맞다고 답하면
+				if(answer.equalsIgnoreCase("Y")) {
+					//RENTAL테이블에 대출정보 추가
+					renService.addRental(MemberVO.getId(), bookNo);
+					
+					//BOOKLIST테이블에 대출불가(0) 추가
+					//RENTAL 테이블에 회원정보(ID) 추가
+					bookService.changeStatus(0, bookNo);
+					renService.getRentalList(MemberVO.getId());
+				}
+				System.out.printf("%d : <%s> 도서가 대여되었습니다.    ", book.getManageNo(), book.getTitle());
+				System.out.printf("(대여기간 : 3일/반납일 : %s)\n", ren.getDueDate());
 			}
-			
-			//렌탈 테이블의 RENT_ID에 멤버 ID를 넣고
-			//렌탈 테이블에 멤버 정보를 넣고...
-			//북테이블에 재고 빼기. 
-			
-			//반납일 설정용
-//			Calendar calendar = Calendar.getInstance();
-//			calendar.add(Calendar.DATE, 3);
-			
-			System.out.printf("%d : <%s> 도서가 대여되었습니다.    ", book.getManageNo(), book.getTitle());
-			System.out.printf("(대여기간 : 3일/반납일 : %tY/%tm/%td)\n",
-							RentalVO.getDueDate(),RentalVO.getDueDate(),RentalVO.getDueDate());
-			
 		} else {
 			System.out.println("일치하는 도서 정보가 없습니다.");
 		}

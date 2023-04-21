@@ -53,9 +53,11 @@ public class MemberUI extends BaseUI {
 	@Override
 	public void run() throws Exception {
 		IMainUI ui = null; //인터페이스를 구현한 클래스의 객체를 받는 것은 가능
-		
 		while(true) {
 			switch(menu()) {
+			default :
+				System.out.println("잘못 입력하셨습니다.");
+				break;
 			case 1 :
 //				System.out.println("<전체 도서목록 보기>");
 				ui = new TempAllBooksUI();
@@ -70,7 +72,7 @@ public class MemberUI extends BaseUI {
 				break;
 			case 4 :
 				System.out.println("<도서 반납>");
-//				ui = new JoinUI();
+				ui = new ReturnBookUI();
 				break;
 			case 5 :
 				System.out.println("<내정보 관리>");
@@ -78,14 +80,11 @@ public class MemberUI extends BaseUI {
 				break;
 			case 9 :
 				System.out.println("<로그아웃>");
-//				ui = new LogOutUI();
+				ui = new LogOutUI();
 				break;
 			case 0 : 
 //				System.out.println("<나가기>");
 				ui = new ExitUI();
-				break;
-			default :
-				System.out.println("잘못 입력하셨습니다.");
 				break;
 			}
 			if(ui != null) {

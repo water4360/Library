@@ -9,7 +9,6 @@ import com.soob.util.PrintService;
 
 public class TempSearchBookUI extends BaseUI {
 
-	
 	private BookService service;
 	private BookVO book;
 	
@@ -35,9 +34,9 @@ public class TempSearchBookUI extends BaseUI {
 			
 			//책이 있으면?
 			if(book != null) {
-				new PrintService().printTop();
+				p.printTop();
 				System.out.print(book);
-				new PrintService().printBottom();
+				p.printBottom();
 			} else {
 				System.out.println("::[" + manageNo + "]번 도서는 존재하지 않습니다");
 				run();
@@ -49,11 +48,12 @@ public class TempSearchBookUI extends BaseUI {
 			//제목으로 검색하는 경우
 			searchWord = scanStr("검색할 도서명을 입력하세요 [0]취소 >> ");
 			if(searchWord.equals("0")) {
+				System.out.println("입력취소. 메뉴를 다시 선택해주세요.");
 				return;
 			} else {
 				bookList = service.searchBooks(menu, searchWord);
 			
-				new PrintService().printTop();
+				p.printTop();
 				
 				if(bookList == null || bookList.size() == 0) {
 					System.out.println("\t\t\t\t검색 결과가 없습니다.");
@@ -64,7 +64,7 @@ public class TempSearchBookUI extends BaseUI {
 						System.out.print(book);
 					}
 				}
-				new PrintService().printBottom();
+				p.printBottom();
 			}
 			break;
 			
@@ -72,30 +72,27 @@ public class TempSearchBookUI extends BaseUI {
 		case 3 :
 			//저자명으로 검색하는 경우
 			searchWord = scanStr("검색할 저자명을 입력하세요(취소:0) >> ");
-			if(searchWord.equals("0")) return;
-			
-			bookList = service.searchBooks(menu, searchWord);
-			
-			new PrintService().printTop();
-			if(bookList == null || bookList.size() == 0) {
+			if(searchWord.equals("0")) {
+				System.out.println("입력취소. 메뉴를 다시 선택해주세요.");
+				return;
+			} else {
 				bookList = service.searchBooks(menu, searchWord);
-			
-				new PrintService().printTop();
-				
-				if(bookList == null || bookList.size() == 0) {
+
+				p.printTop();
+
+				if(bookList.size() == 0) {
 					System.out.println("\t\t\t\t검색 결과가 없습니다.");
 					run();
-				//책이 있으면?
+					//책이 있으면?
 				} else {
 					for(BookVO book : bookList) {
 						System.out.print(book);
 					}
 				}
-				new PrintService().printBottom();
+				p.printBottom();
 			}
 			break;
 		}
-		
 		
 	}
 

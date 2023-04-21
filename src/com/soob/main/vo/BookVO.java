@@ -129,7 +129,7 @@ public class BookVO {
 	public String toString() {
 		//제목을 맨 뒤로 가게 순서를 바꿔???
 //		System.out.printf("번호 도서명    저자    출판사 상태코드 대출상태");
-		System.out.printf("%d\t%-25s\t\t\t%s\t\t%-4s\t\t%s\t\t%4s\n"
+		System.out.printf("%d\t%-25s\t\t%s\t\t%-4s\t\t%s\t\t%4s\n"
 				, manageNo
 				, title
 				, author

@@ -45,4 +45,10 @@ public class BookService {
 	public String getPublisher(int bookNo) {
 		return bookDao.getPublisher(bookNo);
 	}
+	
+	
+	//STATUS(대출상태) 변경
+	public void changeStatus(int status, int bookNo) {
+		bookDao.changeStatus(status, bookNo);
+	}
 }

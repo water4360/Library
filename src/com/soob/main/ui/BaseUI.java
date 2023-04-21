@@ -16,14 +16,14 @@ public abstract class BaseUI implements IMainUI{
 	protected BookService service;
 	protected MemberService memService;
 	protected RentalService renService;
-//	protected MemberVO mem;
+	protected MemberVO mem;
 	
 	public BaseUI() {
 		sc = new Scanner(System.in);
 		p = new PrintService();
 		service = new BookService();
 		renService = new RentalService();
-//		mem = new MemberVO();
+		mem = new MemberVO();
 	}
 	
 	//문자열 입력받기

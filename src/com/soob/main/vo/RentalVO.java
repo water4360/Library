@@ -1,75 +1,103 @@
 package com.soob.main.vo;
 
-import java.util.Date;
-
 public class RentalVO {
-	private static int bookNo;
-	private static String author;
-	private static String title;
-	private static String publisher;
-	private static String rentId;
-	private static Date renDate;
-	private static Date dueDate;
-	private static int overdueDay;
+	private int bookNo;
+	private String title;
+	private String author;
+	private String publisher;
+	private String rentId;
+	private String renDate;
+	private String dueDate;
+	private int overdueDay;
+//	private int bookNo;
+//	private String title;
+//	private String author;
+//	private String publisher;
+//	private String rentId;
+//	private String renDate;
+//	private String dueDate;
+//	private int overdueDay;
+	
+	
 	
 	public RentalVO() {
 		super();
 	}
-	public static int getBookNo() {
+	public RentalVO(int bookNo, String title, String author, String publisher, String rentId, String renDate, String dueDate, int overdueDay) {
+		super();
+		this.bookNo = bookNo;
+		this.title	= title;
+		this.author = author;
+		this.publisher = publisher;
+		this.rentId = rentId;
+		this.renDate = renDate;
+		this.dueDate = dueDate;
+		this.overdueDay = overdueDay;
+	}
+	public int getBookNo() {
 		return bookNo;
 	}
-	public static void setBookNo(int bookNo) {
-		RentalVO.bookNo = bookNo;
+	public void setBookNo(int bookNo) {
+		this.bookNo = bookNo;
 	}
-	public static String getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
-	public static void setAuthor(String author) {
-		RentalVO.author = author;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
-	public static String getTitle() {
+	public String getTitle() {
 		return title;
 	}
-	public static void setTitle(String title) {
-		RentalVO.title = title;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public static String getPublisher() {
+	public String getPublisher() {
 		return publisher;
 	}
-	public static void setPublisher(String publisher) {
-		RentalVO.publisher = publisher;
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
 	}
-	public static String getRentId() {
+	public String getRentId() {
 		return rentId;
 	}
-	public static void setRentId(String rentId) {
-		RentalVO.rentId = rentId;
+	public void setRentId(String rentId) {
+		this.rentId = rentId;
 	}
-	public static Date getRenDate() {
+	public String getRenDate() {
 		return renDate;
 	}
-	public static void setRenDate(Date renDate) {
-		RentalVO.renDate = renDate;
+	public void setRenDate(String renDate) {
+		this.renDate = renDate;
 	}
-	public static Date getDueDate() {
+	public String getDueDate() {
 		return dueDate;
 	}
-	public static void setDueDate(Date dueDate) {
-		RentalVO.dueDate = dueDate;
+	public void setDueDate(String dueDate) {
+		this.dueDate = dueDate;
 	}
-	public static int getOverdueDay() {
+	public int getOverdueDay() {
 		return overdueDay;
 	}
-	public static void setOverdueDay(int overdueDay) {
-		RentalVO.overdueDay = overdueDay;
+	public void setOverdueDay(int overdueDay) {
+		this.overdueDay = overdueDay;
 	}
 	@Override
 	public String toString() {
-		System.out.printf("도서명:%s  저자명:%s   반납예정일:%tY/%tm/%td"
-					, RentalVO.getTitle()
-					, RentalVO.getAuthor()
-					, RentalVO.getDueDate(), RentalVO.getDueDate(), RentalVO.getDueDate());
+		System.out.printf("%d\t%-25s\t\t%s\t\t%-4s\t\t%s\t\t%4s\n"
+				, bookNo
+				, title
+				, author
+				, publisher
+				, renDate
+				, dueDate
+				, overdueDay);
 		return "";
+//		System.out.printf("도서명:%s  저자명:%s   반납예정일:%s"
+//					, Title()
+//					, Author()
+//					, OverdueDay());
+//		return "";
 	}
 	
 	

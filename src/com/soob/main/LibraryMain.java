@@ -13,7 +13,8 @@ public class LibraryMain {
 			main.run();
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.getMessage();
+			System.out.println("잘못된 입력입니다. 다시 실행해주세요.");
 		}
 	}
 
