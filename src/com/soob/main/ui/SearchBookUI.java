@@ -5,14 +5,13 @@ import java.util.List;
 import com.soob.main.service.BookService;
 import com.soob.main.service.BookServiceFactory;
 import com.soob.main.vo.BookVO;
-import com.soob.util.PrintService;
 
-public class TempSearchBookUI extends BaseUI {
+public class SearchBookUI extends BaseUI {
 
 	private BookService service;
 	private BookVO book;
 	
-	public TempSearchBookUI() {
+	public SearchBookUI() {
 		service = BookServiceFactory.getInstance();
 	}
 	
@@ -25,6 +24,9 @@ public class TempSearchBookUI extends BaseUI {
 		List<BookVO> bookList; 
 		
 		switch(menu) {
+		default :
+			System.out.println("잘못 입력하셨습니다.");
+			break;
 		case 1 : 
 			//도서번호로 검색하는 경우
 			int manageNo = scanInt("검색할 도서의 관리번호를 입력하세요 [0]취소 >> ");
@@ -43,7 +45,6 @@ public class TempSearchBookUI extends BaseUI {
 			}
 			break;
 			
-			
 		case 2 :
 			//제목으로 검색하는 경우
 			searchWord = scanStr("검색할 도서명을 입력하세요 [0]취소 >> ");
@@ -54,7 +55,6 @@ public class TempSearchBookUI extends BaseUI {
 				bookList = service.searchBooks(menu, searchWord);
 			
 				p.printTop();
-				
 				if(bookList == null || bookList.size() == 0) {
 					System.out.println("\t\t\t\t검색 결과가 없습니다.");
 					run();
@@ -67,7 +67,6 @@ public class TempSearchBookUI extends BaseUI {
 				p.printBottom();
 			}
 			break;
-			
 			
 		case 3 :
 			//저자명으로 검색하는 경우

@@ -8,7 +8,7 @@ public class BookVO {
 	private String author;
 	private String publisher;
 	private int stock;
-	private int status; // 0:대여불가, 1:대여가능
+	private int status; // 0:대여불가, 5:대여가능
 	
 	public BookVO(int manageNo, String title, String author, String publisher, int status) {
 		super();

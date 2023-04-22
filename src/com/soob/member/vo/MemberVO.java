@@ -19,6 +19,14 @@ public class MemberVO {
 		super();
 	}
 	
+	public MemberVO(String id, String pw, String userName, String userPhone)
+	{
+		super();
+		MemberVO.id = id;
+		MemberVO.pw = pw;
+		MemberVO.userName = userName;
+		MemberVO.userPhone = userPhone;
+	}
 	public MemberVO(int memberNo, String id, String pw, String userName,
 					String userPhone) 
 	{
@@ -52,14 +60,14 @@ public class MemberVO {
 	public static String getUserName() {
 		return userName;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public static void setUserName(String userName) {
+		MemberVO.userName = userName;
 	}
 	public static String getUserPhone() {
 		return userPhone;
 	}
-	public void setUserPhone(String userPhone) {
-		this.userPhone = userPhone;
+	public static void setUserPhone(String userPhone) {
+		MemberVO.userPhone = userPhone;
 	}
 //	public String getRentalStatus() {
 //		return rentalStatus;
@@ -75,7 +83,7 @@ public class MemberVO {
 //	}
 	@Override
 	public String toString() {
-		System.out.printf("ID : %s, PW : %s, 이름 : %s, 연락처 : %s",
+		System.out.printf("%s\t\t%s\t\t%s\t\t%s\n",
 							id, pw, userName, userPhone);
 		return "";
 	}

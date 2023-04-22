@@ -17,6 +17,15 @@ public class BookService {
 			bookDao = new BookDAO();
 	}
 	
+	
+	
+	
+	
+	//1. bookDao단계에서 모아준 데이터를 추가해주는 메소드
+	public void addBook(BookVO book) {
+		bookDao.addBook(book);
+	}
+	
 	//2. 모든 bookList를 보여주는 메소드
 	public List<BookVO> showAllBooks() {
 		List<BookVO> bookList = bookDao.showAllBooks();
@@ -28,6 +37,39 @@ public class BookService {
 		BookVO book = bookDao.searchOneBook(manageNo);
 		return book;
 	}
+	
+	//4. 번호로 찾아서 삭제하는 메소드
+	public BookVO deleteBook(int manageNo) {
+		BookVO book = bookDao.deleteBook(manageNo);
+		return book;
+	}
+	
+	//5. 번호로 찾아서 수정하는 메소드
+	public BookVO modifyBook(int menu, int manageNo, String str) {
+		BookVO book = bookDao.modifyBook(menu, manageNo, str);
+		return book;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+//	
+//	
+//	//2. 모든 bookList를 보여주는 메소드
+//	public List<BookVO> showAllBooks() {
+//		List<BookVO> bookList = bookDao.showAllBooks();
+//		return bookList;
+//	}
+//
+//	//3. 번호로 찾아서 보여주는 메소드(일단 단일)
+//	public BookVO searchOneByNo(int manageNo) {
+//		BookVO book = bookDao.searchOneBook(manageNo);
+//		return book;
+//	}
 	
 	//3-2 메뉴에 따라 도서명/저자명 검색
 	public List<BookVO> searchBooks(int menu, String str) {

@@ -8,10 +8,7 @@ import com.soob.util.PrintService;
 
 public class RegisterUI extends BaseUI {
 
-	private BookService bookService;
-	
 	public RegisterUI() {
-		bookService = BookServiceFactory.getInstance();
 	}
 	
 	

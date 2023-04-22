@@ -42,6 +42,11 @@ public class MemberService {
 		return memDao.getMemberById(id);
 	}
 	
+	//전체 회원 보기(관리자용)
+	public List<MemberVO> getAllMembers() {
+		return memDao.getAllMembers();
+	}
+	
 	//2. 모든 bookList를 보여주는 메소드
 //	public List<MemberVO> showAllBooks() {
 //		List<MemberVO> bookList = memDao.showAllMems();

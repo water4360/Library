@@ -2,6 +2,7 @@ package com.soob.main.ui;
 
 import java.util.Scanner;
 
+import com.soob.admin.service.NoticeService;
 import com.soob.main.service.BookService;
 import com.soob.main.service.RentalService;
 import com.soob.member.service.MemberService;
@@ -13,16 +14,18 @@ public abstract class BaseUI implements IMainUI{
 	//스캐너 상속용도 + ui들 묶어주기
 	private Scanner sc;
 	protected PrintService p;
-	protected BookService service;
+	protected BookService bookService;
 	protected MemberService memService;
 	protected RentalService renService;
+	protected NoticeService noticeService;
 	protected MemberVO mem;
 	
 	public BaseUI() {
 		sc = new Scanner(System.in);
 		p = new PrintService();
-		service = new BookService();
+		bookService = new BookService();
 		renService = new RentalService();
+		noticeService = new NoticeService();
 		mem = new MemberVO();
 	}
 	

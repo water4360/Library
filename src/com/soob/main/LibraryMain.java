@@ -13,8 +13,9 @@ public class LibraryMain {
 			main.run();
 			
 		} catch (Exception e) {
-			e.getMessage();
-			System.out.println("잘못된 입력입니다. 다시 실행해주세요.");
+			e.printStackTrace();
+			System.out.println("::잘못된 입력입니다. 첫 화면으로 돌아갑니다.");
+			main(null);
 		}
 	}
 

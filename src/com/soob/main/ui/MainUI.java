@@ -1,35 +1,54 @@
 package com.soob.main.ui;
 
+import java.util.List;
 import java.util.Scanner;
 
-public class MainUI extends BaseUI{
+import com.soob.admin.notice.ui.ManageNoticeUI;
+import com.soob.admin.vo.NoticeVO;
 
-	public void intro() {
+public class MainUI extends BaseUI{
+	
+	public void intro() throws Exception {
+		
+		//리스트의 최신 1~3개 공지만.
+
+		
+		 
 		p.printBottom();
-		System.out.println("\t\t\t숲 도서관에 방문하신 것을 환영합니다!");
-//		System.out.println();
-//		System.out.println("\t\"한 권의 책은 세계에 대한 하나의 버전이다.\"");
-//		System.out.println("\t\t\t\t\t-살만 루시디(Salman Rushdie)");
-//		System.out.println("\t\t\t\t\t대표저서 <한밤의 아이들>");
+		System.out.println("\t\t\t\t\t숲 도서관에 방문하신 것을 환영합니다!");
 		System.out.println();
-		System.out.println("\t\t* 처음 방문하신 분은 회원가입 및 로그인 후 이용해주세요.");
-		System.out.println("\t\t* 비회원은 도서목록 열람 및 검색만 가능합니다.");
+		System.out.println("\t\t\t\t\"한 권의 책은 세계에 대한 하나의 버전이다.\"");
+		System.out.println("\t\t\t\t-살만 루시디(Salman Rushdie)");
+		System.out.println("\t\t\t\t\t 대표저서 <한밤의 아이들>");
+		System.out.println();
+		System.out.println("\t\t\t\t* 처음 방문하신 분은 회원가입 및 로그인 후 이용해주세요.");
+		System.out.println("\t\t\t\t* 비회원은 도서목록 열람 및 검색만 가능합니다.");
 		p.printBottom();
-		System.out.println("* 공지사항 : 이번달 정기 독서토론은 4/24(월) 숲 도서관 2층 카페라운지에서 진행합니다 :)");
-		p.printBottom();
+
+		//관리자 공지사항
+		new ManageNoticeUI().show();
+//		System.out.println("* MainUI공지사항 : 이번달 정기 독서토론은 4/24(월) 숲 도서관 2층 카페라운지에서 진행합니다 :)");
 	}
 	
 	public int menu() {
 		//방문자 메뉴
-		System.out.println("1. 전체 도서목록 조회");
-		System.out.println("2. 도서 검색");
-		System.out.println("3. 회원가입");
-		System.out.println("4. 로그인");
-		System.out.println("0. 나가기");
+		System.out.print("[1] 전체 도서목록 조회  ");
+		System.out.print("[2] 도서 검색  ");
+		System.out.print("[3] 회원가입  ");
+		System.out.print("[4] 로그인  ");
+		System.out.println("[0] 프로그램 종료  ");
 		System.out.print("메뉴를 선택하세요 >> ");
 		
 		Scanner sc = new Scanner(System.in);
-		return Integer.parseInt(sc.nextLine());
+		int select = 9;
+		try {
+			select = Integer.parseInt(sc.nextLine());
+			
+		} catch (Exception e) {
+			System.out.println("::잘못된 입력입니다. 다시 입력해주세요.");
+			menu();
+		}
+		return select;
 	}
 	
 	
@@ -40,18 +59,20 @@ public class MainUI extends BaseUI{
 			switch(menu()) {
 			case 1 :
 //				System.out.println("<전체 도서목록 보기>");
-				ui = new TempAllBooksUI();
+				ui = new AllBooksUI();
 				break;
 			case 2 :
 //				System.out.println("<도서 검색>");
-				ui = new TempSearchBookUI();
+				ui = new SearchBookUI();
 				break;
 			case 3 :
-				System.out.println("<회원가입>");
+				System.out.println("<숲 도서관 회원가입>");
+				System.out.println("회원이 되면 대여서비스를 이용할 수 있어요!");
+				System.out.println();
 				ui = new JoinUI();
 				break;
 			case 4 :
-				System.out.println("<로그인>");
+//				System.out.println("<숲 도서관 로그인>");
 				ui = new LoginUI();
 				break;
 			case 0 : 
@@ -59,13 +80,13 @@ public class MainUI extends BaseUI{
 				ui = new ExitUI();
 				break;
 			default :
-				System.out.println("잘못 입력하셨습니다.");
+				System.out.println("::잘못 입력하셨습니다.");
 				break;
 			}
 			if(ui != null) {
 				ui.run();
 			} else {
-				System.out.println("잘못 입력하셨습니다.");
+				System.out.println("::잘못 입력하셨습니다.");
 //				System.out.println("여기는 main, 호출된 ui가 없음");
 			}
 		}

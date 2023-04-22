@@ -7,11 +7,11 @@ import com.soob.main.service.BookServiceFactory;
 import com.soob.main.vo.BookVO;
 import com.soob.util.PrintService;
 
-public class TempAllBooksUI extends BaseUI{
+public class AllBooksUI extends BaseUI{
 	
 	private BookService bookService;
 	
-	public TempAllBooksUI() {
+	public AllBooksUI() {
 		bookService = BookServiceFactory.getInstance();
 //		System.out.println(" >>>>>>>>> TempAllBooksUI 진입");
 	}

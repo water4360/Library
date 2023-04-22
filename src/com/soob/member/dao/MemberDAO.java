@@ -3,8 +3,10 @@ package com.soob.member.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.soob.main.vo.BookVO;
 import com.soob.member.vo.MemberVO;
 import com.soob.util.ConnectionFactory;
 
@@ -44,41 +46,7 @@ public class MemberDAO {
 	}
 	
 	
-//	//1. 저장된 모든 멤버VO리스트를 보여주는 메소드
-//	public List<MemberVO> showAllMembers() {
-//		List<MemberVO> memList = new ArrayList<>();
-//		
-//		StringBuilder sql = new StringBuilder();
-//		sql.append("SELECT * FROM BOOKLIST ORDER BY NO");
-//		
-//		try(
-//				Connection conn = new ConnectionFactory().getConnection();
-//				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
-//		) {
-//			ResultSet rs = pstmt.executeQuery();
-//			
-//			while(rs.next()) {
-//				
-//				int no 			= rs.getInt("NO");
-//				String title	= rs.getString("TITLE");
-//				String author	= rs.getString("AUTHOR");
-//				String publisher= rs.getString("PUBLISHER");
-//				int stock 		= rs.getInt("STOCK");
-//				int status 		= rs.getInt("STATUS");
-//				
-//				BookVO book = new BookVO(no, title, author, publisher, stock, status);
-//
-////				System.out.println(book);
-//				bookList.add(book);
-//			}
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return bookList;
-//	}
-//
+
 	//0.회원가입/로그인1단계-ID 중복 검색하는 메소드.
 	public boolean isDuplicatedId(String id) {
 		
@@ -167,31 +135,75 @@ public class MemberDAO {
 	}
 
 	//ID로 회원정보 뽑아오기
-	public MemberVO getMemberById(String id) {
+	public MemberVO getMemberById(String userId) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT ID, NAME, RENTAL_STATUS, RENTAL_NO FROM MEMBER" 
-				+ "WHERE ID = ? ");
+		MemberVO mem = null;
+		
+		sql.append("SELECT ID, PW, NAME, PHONE FROM MEMBER WHERE ID = ? ");
 		try(
 				Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 			) {
-				pstmt.setString(1, id);
+				pstmt.setString(1, userId);
 				
 				ResultSet rs = pstmt.executeQuery();
 				
 				//ID가 존재하면 쿼리를 실행하고
 				if(rs.next()) {
-					String name = rs.getString("NAME");
-					String rentalStatus = rs.getString("RENTAL_STATUS");
+					String id    = rs.getString("ID");
+					String pw 	 = rs.getString("PW");
+					String name  = rs.getString("NAME");
+					String phone = rs.getString("PHONE");
 					
+					mem = new MemberVO(id, pw, name, phone);
 					
+					MemberVO.setId(id);
+					MemberVO.setPw(pw);
+					MemberVO.setUserName(name);
+					MemberVO.setUserPhone(phone);
 				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		
-		return null;
+		return mem;
+	}
+
+
+	//1. 저장된 모든 멤버VO리스트를 보여주는 메소드
+	public List<MemberVO> getAllMembers() {
+		List<MemberVO> memList = new ArrayList<>();
+			
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT * FROM MEMBER ORDER BY MEM_NO");
+		
+		try(
+			Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		) {
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				int memNo 	 = rs.getInt("MEM_NO");
+				int memCode	 = rs.getInt("MEM_CODE");
+				String id	 = rs.getString("ID");
+				String pw	 = rs.getString("PW");
+				String name	 = rs.getString("NAME");
+				String phone = rs.getString("PHONE");
+				
+				MemberVO mem = new MemberVO(memNo, id, pw, name, phone);
+
+//					System.out.println(book);
+				memList.add(mem);
+			}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		return memList;
 	}
 	
 	

@@ -23,5 +23,15 @@ public class PrintService {
 	public void rentalBottom() {
 		System.out.println("-".repeat(130));
 	}
+
+	public void memTop() {
+		System.out.println("-".repeat(130));
+		System.out.println("ID\t\tPW\t\t이름\t\t연락처");
+		System.out.println("-".repeat(130));
+	}
+
+	public void memBottom() {
+		System.out.println("-".repeat(130));
+	}
 	
 }

@@ -1,26 +1,23 @@
 package com.soob.admin.ui;
 
-import com.soob.admin.service.BookService;
-import com.soob.admin.service.BookServiceFactory;
+import com.soob.main.service.BookServiceFactory;
+import com.soob.main.ui.BaseUI;
 import com.soob.main.vo.BookVO;
-import com.soob.util.PrintService;
 
 public class DeleteBookUI extends BaseUI {
 	
-	private BookService service;
-	
 	public DeleteBookUI() {
-		service = BookServiceFactory.getInstance();
+		bookService = BookServiceFactory.getInstance();
 	}
 
 	@Override
 	public void run() throws Exception {
 		int manageNo = scanInt("삭제할 도서번호를 입력하세요 >> ");
-		BookVO book = service.searchOneByNo(manageNo);
+		BookVO book = bookService.searchOneByNo(manageNo);
 		
-		new PrintService().printTop();
+		p.printTop();
 		System.out.print(book);
-		new PrintService().printBottom();
+		p.printBottom();
 		String answer = "";
 		if(book != null) {
 			answer = scanStr("삭제할 도서의 정보가 맞습니까?(Y/N) >> ");
@@ -32,14 +29,14 @@ public class DeleteBookUI extends BaseUI {
 		}
 		if(answer.equalsIgnoreCase("Y")) {
 			//관리번호가 맞으면 삭제 진짜로 실행.
-			book = service.deleteByNo(manageNo);
+			book = bookService.deleteBook(manageNo);
 		} else {
 			System.out.println("::삭제를 취소하고 초기 메뉴로 돌아갑니다.");
 			return;			
 		}
 		
 		
-		book = service.deleteByNo(manageNo);
+		book = bookService.deleteBook(manageNo);
 		System.out.println("::도서번호 " + manageNo + " 도서가 삭제되었습니다.");
 
 	}

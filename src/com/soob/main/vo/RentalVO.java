@@ -84,7 +84,7 @@ public class RentalVO {
 	}
 	@Override
 	public String toString() {
-		System.out.printf("%d\t%-25s\t\t%s\t\t%-4s\t\t%s\t\t%4s\n"
+		System.out.printf("%d\t%-25s\t\t%s\t\t%-4s\t\t%s\t%4s\n"
 				, bookNo
 				, title
 				, author
