@@ -8,16 +8,17 @@ public class BookVO {
 	private String author;
 	private String publisher;
 	private int stock;
-	private int status; // 0:대여불가, 5:대여가능
+	private int status; // 0:대여불가, 1:대여가능
 	private int pop;
 	
-	public BookVO(int manageNo, String title, String author, String publisher, int status) {
+	public BookVO(int manageNo, String title, String author, String publisher, int status, int pop) {
 		super();
-		this.manageNo = manageNo;
-		this.title = title;
-		this.author = author;
-		this.publisher = publisher;
-		this.status = status;
+		this.manageNo 	= manageNo;
+		this.title		= title;
+		this.author 	= author;
+		this.publisher  = publisher;
+		this.status 	= status;
+		this.pop 		= pop;
 	}
 	
 	
@@ -133,14 +134,14 @@ public class BookVO {
 	public String toString() {
 		//제목을 맨 뒤로 가게 순서를 바꿔???
 //		System.out.printf("번호 도서명    저자    출판사 상태코드 대출상태");
-		System.out.printf("%d\t%-25s\t\t%s\t\t%-4s\t\t%s\t\t%4s\n"
+		System.out.printf("%d\t%-25s\t\t%-8s\t\t%-10s\t\t%-2s\t\t%4s\n"
 				, manageNo
 				, title
 				, author
 				, publisher
 //				, stock
 				, status
-				, (status == 5 ? "대출가능" : "대출불가"));
+				, (status == 1 ? "대출가능" : "대출불가"));
 		return "";
 	}
 	

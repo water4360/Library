@@ -17,7 +17,7 @@ public class ModifyBookUI extends BaseUI {
 	public void run() throws Exception {
 		int searchNo = 0;
 		try {
-			searchNo = scanInt("수정할 도서의 관리번호를 입력하세요(취소:0) >> ");
+			searchNo = scanInt("수정할 도서의 관리번호를 입력하세요 [0]취소 >> ");
 		} catch (Exception e) {
 			System.out.println("::잘못된 입력입니다.");
 			run();

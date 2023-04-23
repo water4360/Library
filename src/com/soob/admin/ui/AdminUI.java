@@ -7,8 +7,9 @@ import java.util.Scanner;
 import com.soob.main.ui.BaseUI;
 import com.soob.main.ui.IMainUI;
 import com.soob.admin.modify.ui.ModifyBookUI;
-import com.soob.admin.notice.ui.ManageNoticeUI;
+import com.soob.admin.notice.ui.NoticeUI;
 import com.soob.main.ui.AllBooksUI;
+import com.soob.member.ui.RequestUI;
 import com.soob.member.vo.MemberVO;
 
 public class AdminUI extends BaseUI	{
@@ -19,8 +20,8 @@ public class AdminUI extends BaseUI	{
 	
 	public void intro() {
 		p.printBottom();
-		System.out.println("\t\t\t관리자 전용 화면(도서등록 및 관리)");
-		System.out.printf("\t\t\t%s님, 접속중 (%s)\n",MemberVO.getId(), now);
+		System.out.println("\t\t\t\t\t관리자 전용 화면(도서등록 및 관리)");
+		System.out.printf("\t\t\t\t\t%s님, 접속중 (%s)\n",MemberVO.getId(), now);
 		p.printBottom();
 	}
 	
@@ -29,12 +30,11 @@ public class AdminUI extends BaseUI	{
 		//1~5번 [도서관리]로 묶을까?
 		System.out.print("[1] 도서 신규등록  ");
 		System.out.print("[2] 도서 수정  ");
-		System.out.println("[3] 기존도서 삭제  ");
+		System.out.print("[3] 기존도서 삭제  ");
+		System.out.println("[4] 전체 도서목록 출력  ");
 		
-		System.out.print("[4] 전체 도서목록 출력  ");
-		System.out.println("[5] 희망도서 신청내역  ");
+		System.out.println("[5] 회원 요청사항  ");
 //		System.out.print("[6] 회원 관리  ");
-		
 		System.out.print("[8] 공지사항 관리  ");
 		System.out.print("[9] 로그아웃  ");
 		System.out.println("[0] 프로그램 종료  ");
@@ -62,41 +62,41 @@ public class AdminUI extends BaseUI	{
 		while(true) {
 			switch(menu()) {
 			case 1 :
-				System.out.println("<신규도서 등록>");
-				System.out.println("신규도서를 등록할 수 있습니다.");
-				ui = new RegisterUI();
+//				System.out.println("<신규도서 등록>");
+				System.out.println("::도서명, 저자명, 출판사명을 입력하여 신규도서를 등록할 수 있어요.");
+				ui = new AddUI();
 				break;
 			case 2 :
-				System.out.println("<기존도서 수정>");
-				System.out.println("도서번호로 도서를 검색하고 정보를 수정할 수 있습니다.");
+//				System.out.println("<기존도서 수정>");
+				System.out.println("::도서번호로 검색하여 도서명, 저자명, 출판사 정보를 수정할 수 있어요.");
 				ui = new ModifyBookUI();
 				break;
 			case 3 :
-				System.out.println("<기존도서 삭제>");
-				System.out.println("::도서번호로 도서를 검색하고 삭제할 수 있습니다.");
+//				System.out.println("<기존도서 삭제>");
+				System.out.println("::도서번호로 검색하여 도서를 삭제할 수 있어요.");
 				ui = new DeleteBookUI();
 				break;
 			case 4 :
-				System.out.println("<전체 도서목록>");
-				System.out.println("::도서관에서 보유중인 전체 도서목록을 확인할 수 있습니다.");
+//				System.out.println("<전체 도서목록>");
+				System.out.println("::현재 도서관에서 보유중인 전체 도서목록을 확인할 수 있어요.");
 //				ui = new AllBooksUI();
 				ui = new AllBooksUI();
 				break;
-//			case 5 :
-//				System.out.println("<희망도서 신청내역>");
-//				System.out.println("::회원들이 신청한 희망도서를 확인할 수 있습니다.");
-//				ui = new bookRequestUI();
-//				break;
+			case 5 :
+				System.out.println("::회원이 남긴 글을 조회하고 관리할 수 있어요.");
+//				System.out.println("<소통게시판>");
+				ui = new RequestUI();
+				break;
 			case 8 :
-				System.out.println("::프로그램 첫 화면에 공지사항을 등록할 수 있습니다");
+				System.out.println("::프로그램 첫 화면에 공지를 게시할 수 있어요");
 				System.out.println();
-				ui = new ManageNoticeUI();
+				ui = new NoticeUI();
 				break;
 			case 9 :
 				ui = new LogOutUI();
 				break;
 			case 0 : 
-				System.out.println("<프로그램 종료>");
+//				System.out.println("<프로그램 종료>");
 				ui = new ExitUI();
 				break;
 			default :

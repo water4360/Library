@@ -10,7 +10,10 @@ public class ExitUI extends BaseUI {
 	@Override
 	public void run() throws Exception {
 //		p.printBottom();
-		System.out.println("\t\t\t관리자 모드를 종료하고 첫 화면으로 돌아갑니다.");
+//		System.out.println("::관리자 모드를 종료하고 첫 화면으로 돌아갑니다.");
+		System.out.println("::프로그램을 종료합니다.");
+		System.exit(0);
+		System.out.println();
 //		p.printBottom();
 		
 		//메인메뉴로 복귀.

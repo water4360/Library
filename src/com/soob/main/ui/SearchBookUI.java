@@ -17,15 +17,21 @@ public class SearchBookUI extends BaseUI {
 	
 	@Override
 	public void run() throws Exception {
+		int menu = 0;
 		
-		int menu = scanInt("[1]관리번호 [2]도서명 [3]저자명\n"
-							+ "도서 검색 방법을 선택하세요 >> ");
+		try {
+			menu = scanInt("[1]관리번호 [2]도서명 [3]저자명\n"
+					+ "도서 검색 방법을 선택하세요 >> ");
+		} catch (Exception e) {
+			System.out.println("::잘못된 입력입니다. 다시 입력해주세요.");
+			run();
+		}
 		String searchWord;
 		List<BookVO> bookList; 
 		
 		switch(menu) {
 		default :
-			System.out.println("잘못 입력하셨습니다.");
+			System.out.println("::해당 메뉴는 존재하지 않아요.");
 			break;
 		case 1 : 
 			//도서번호로 검색하는 경우

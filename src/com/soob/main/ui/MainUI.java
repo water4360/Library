@@ -3,7 +3,7 @@ package com.soob.main.ui;
 import java.util.List;
 import java.util.Scanner;
 
-import com.soob.admin.notice.ui.ManageNoticeUI;
+import com.soob.admin.notice.ui.NoticeUI;
 import com.soob.admin.vo.NoticeVO;
 
 public class MainUI extends BaseUI{
@@ -15,18 +15,22 @@ public class MainUI extends BaseUI{
 		
 		 
 		p.printBottom();
-		System.out.println("\t\t\t\t\t숲 도서관에 방문하신 것을 환영합니다!");
+//		System.out.println("\t\t\t\t\t ⎛⎝(•‿•)⎠⎞⎛⎝(•‿•)⎠⎞⎛⎝(•‿•)⎠⎞⎛⎝(•‿•)⎠⎞⎛⎝(•‿•)⎠⎞ ");
+//		System.out.println("\t\t\t\t\t✐✎✐✎✐✎✐✎✐✎✐✎✐✎✐✎✐✎✐✎✐✎✐✎");
+		System.out.println("\t\t\t\t\tѧѦ ѧ  ͡︵︵ ̢ ̱ ̧̱ι̵̱̊ι̶̨̱ ̶̱   ︵ ͡︵ Ѧѧ ѧ Ѧ    ̵̗̊o̵̖ ͡ ︵︵︵ ѧ Ѧѧ");
+		System.out.println("\t\t\t\t\t숲 도서관에 방문하신 것을 환영합니다");
+		System.out.println("\t\t\t\t\tѧѦ ѧ  ︵͡︵  ̢ ̱ ̧̱ι̵̱̊ι̶̨̱ ̶̱   ︵ Ѧѧ ѧ Ѧ    ̵̗̊o̵̖  ͡︵  ѦѦ ѧ Ѧ");
 		System.out.println();
 		System.out.println("\t\t\t\t\"한 권의 책은 세계에 대한 하나의 버전이다.\"");
-		System.out.println("\t\t\t\t-살만 루시디(Salman Rushdie)");
-		System.out.println("\t\t\t\t\t 대표저서 <한밤의 아이들>");
+		System.out.println("\t\t\t\t-살만 루시디(Salman Rushdie), 대표저서 <한밤의 아이들>");
+//		System.out.println("\t\t\t\t 대표저서 <한밤의 아이들>");
 		System.out.println();
 		System.out.println("\t\t\t\t* 처음 방문하신 분은 회원가입 및 로그인 후 이용해주세요.");
 		System.out.println("\t\t\t\t* 비회원은 도서목록 열람 및 검색만 가능합니다.");
 		p.printBottom();
 
 		//관리자 공지사항
-		new ManageNoticeUI().show();
+		new NoticeUI().show();
 //		System.out.println("* MainUI공지사항 : 이번달 정기 독서토론은 4/24(월) 숲 도서관 2층 카페라운지에서 진행합니다 :)");
 	}
 	

@@ -72,7 +72,7 @@ public class NoticeDAO {
 	//공지 삭제
 	public void delNotice(int no_no) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("DROP FROM T_NOTICE WHERE NO = ? ");
+		sql.append("DELETE FROM T_NOTICE WHERE NO = ? ");
 		
 		try(
 			Connection conn = new ConnectionFactory().getConnection();

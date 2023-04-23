@@ -12,7 +12,7 @@ public class LogOutUI extends BaseUI {
 		int answer = 9;
 		try {
 			if(MemberVO.getId()!=null)
-				System.out.println("관리자모드 로그아웃 완료!");
+				System.out.println("::관리자모드 로그아웃 완료!");
 			
 			answer = scanInt("[0]프로그램 종료 [1]첫화면으로 돌아가기 >> ");
 		} catch (Exception e) {
@@ -22,10 +22,12 @@ public class LogOutUI extends BaseUI {
 		} 
 		switch (answer) {
 			case 0:
-				System.out.println("도서관리 시스템을 종료합니다.");
-				System.out.println("숲 도서관을 위한 노고에 감사드려요 :)");
+				System.out.println("::도서대여 프로그램을 종료합니다.");
+				System.out.println("::숲 도서관을 위한 노고에 감사드려요 :)");
 				System.exit(0);
 			case 1 :
+				System.out.println("::관리자 모드를 종료하고 첫 화면으로 돌아갑니다.");
+				System.out.println("::숲 도서관을 위한 노고에 감사드려요 :)");
 				LibraryMain.main(null);
 				break;
 			default:

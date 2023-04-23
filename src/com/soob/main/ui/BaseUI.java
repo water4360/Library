@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 import com.soob.admin.service.NoticeService;
 import com.soob.main.service.BookService;
-import com.soob.main.service.RentalService;
 import com.soob.member.service.MemberService;
+import com.soob.member.service.RentalService;
+import com.soob.member.service.RequestService;
 import com.soob.member.vo.MemberVO;
 import com.soob.util.PrintService;
 
@@ -18,6 +19,7 @@ public abstract class BaseUI implements IMainUI{
 	protected MemberService memService;
 	protected RentalService renService;
 	protected NoticeService noticeService;
+	protected RequestService reqService;
 	protected MemberVO mem;
 	
 	public BaseUI() {
@@ -25,7 +27,9 @@ public abstract class BaseUI implements IMainUI{
 		p = new PrintService();
 		bookService = new BookService();
 		renService = new RentalService();
+		reqService = new RequestService();
 		noticeService = new NoticeService();
+		memService = new MemberService();
 		mem = new MemberVO();
 	}
 	

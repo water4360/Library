@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.soob.main.vo.BookVO;
+import com.soob.member.vo.MemberVO;
 import com.soob.util.ConnectionFactory;
 
 /**
@@ -24,11 +25,11 @@ public class BookDAO {
 	 * 도서검색 및 관리 관련
 	 * @param main.BookDAO
 	 */
-	//1. DB에 정보를 추가하는 메소드
+	//1. DB에 도서 등록
 		public void addBook(BookVO book) {
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO BOOKLIST(NO, TITLE, AUTHOR, PUBLISHER, STOCK) ");
-			sql.append(" VALUES(SEQ_BOOKLIST_NO.NEXTVAL, ?, ?, ?, ?) ");
+			sql.append("INSERT INTO BOOKLIST(NO, TITLE, AUTHOR, PUBLISHER) ");
+			sql.append(" 		VALUES(SEQ_BOOKLIST_NO.NEXTVAL, ?, ?, ?) ");
 			
 			try(
 					Connection conn = new ConnectionFactory().getConnection();
@@ -37,10 +38,13 @@ public class BookDAO {
 				pstmt.setString(1, book.getTitle());
 				pstmt.setString(2, book.getAuthor());
 				pstmt.setString(3, book.getPublisher());
-				pstmt.setInt(4, book.getStock());
+//				pstmt.setInt(4, book.getStock());
 //				pstmt.setInt(5, book.getStatus());
 				
-				pstmt.executeUpdate();
+				int cnt = pstmt.executeUpdate();
+				if(cnt==0) {
+					System.out.println("main.BookDAO 업데이트 개수 " + cnt);
+				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -67,10 +71,10 @@ public class BookDAO {
 					String title	= rs.getString("TITLE");
 					String author	= rs.getString("AUTHOR");
 					String publisher= rs.getString("PUBLISHER");
-					int stock 		= rs.getInt("STOCK");
 					int status 		= rs.getInt("STATUS");
+					int pop 		= rs.getInt("POP");
 					
-					BookVO book = new BookVO(no, title, author, publisher, status);
+					BookVO book = new BookVO(no, title, author, publisher, status, pop);
 
 //					System.out.println(book);
 					bookList.add(book);
@@ -105,10 +109,10 @@ public class BookDAO {
 					String title	= rs.getString("TITLE");
 					String author	= rs.getString("AUTHOR");
 					String publisher= rs.getString("PUBLISHER");
-					int stock 		= rs.getInt("STOCK");
 					int status 		= rs.getInt("STATUS");
+					int pop 		= rs.getInt("POP");
 					
-					book = new BookVO(no, title, author, publisher, status);
+					book = new BookVO(no, title, author, publisher, status, pop);
 				}
 				
 			} catch (Exception e) {
@@ -211,10 +215,10 @@ public class BookDAO {
 				String title	= rs.getString("TITLE");
 				String author	= rs.getString("AUTHOR");
 				String publisher= rs.getString("PUBLISHER");
-//				int stock 		= rs.getInt("STOCK");
 				int status		= rs.getInt("STATUS");
+				int pop 		= rs.getInt("POP");
 				
-				BookVO book = new BookVO(no, title, author, publisher, status);
+				BookVO book = new BookVO(no, title, author, publisher, status, pop);
 				bookList.add(book);
 			}
 			
@@ -281,14 +285,6 @@ public class BookDAO {
 		}
 		return "";
 	}
-	
-	
-	
-	
-	
-	
-
-
 
 
 	//대여 또는 반납시 상태코드 변경

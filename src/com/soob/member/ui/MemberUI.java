@@ -2,7 +2,7 @@ package com.soob.member.ui;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 import com.soob.main.LibraryMain;
@@ -13,6 +13,7 @@ import com.soob.main.ui.AllBooksUI;
 import com.soob.main.ui.SearchBookUI;
 import com.soob.member.service.MemberServiceFactory;
 import com.soob.member.vo.MemberVO;
+import com.soob.member.vo.RentalVO;
 
 public class MemberUI extends BaseUI {
 	
@@ -27,12 +28,27 @@ public class MemberUI extends BaseUI {
 	Calendar c = Calendar.getInstance();
 	String now = sdf.format(c.getTime());
 	
-	public void intro() {
-		p.printBottom();
+	public void intro() throws Exception {
 		System.out.printf("\t\t\t\t\t%s님 접속중 (%s)\n",MemberVO.getId(), now);
+		p.printBottom();
+		
+		List<RentalVO> bookList = renService.getRentalList(MemberVO.getId());
+		if(bookList.size() == 0) {
+			System.out.println("::대여중인 도서가 없습니다. 흥미있는 도서를 대여해보세요 :)");
+			System.out.println();
+		} else {
+			System.out.printf("\t\t\t\t\t<내가 대여중인 도서목록>\n", MemberVO.getId());
+			
+			p.rentalTop();
+			for(RentalVO ren : bookList) {
+				System.out.print(ren);
+			}
+			p.rentalBottom();
+		
+		
+		}
 		
 //		System.out.println("여기는 MemberUI, ID = " + mem.getId());
-		p.printBottom();
 	}
 	
 	//LoginUI에서 받아올 메소드
@@ -45,11 +61,12 @@ public class MemberUI extends BaseUI {
 		
 		//정상적인 로그인상태
 		if(MemberVO.getId()!=null) {
-			System.out.print("[1]전체 도서목록 보기  ");
-			System.out.print("[2]도서 검색  ");
+			System.out.print("[1]전체도서보기  ");
+			System.out.print("[2]도서검색  ");
 			System.out.print("[3]대여  ");
 			System.out.print("[4]반납  ");
-			System.out.print("[5]내정보 관리  ");
+			System.out.println("[5]내정보관리  ");
+			System.out.print("[8]의견보내기  ");
 			System.out.print("[9]로그아웃  ");
 			System.out.println("[0]프로그램 종료");
 		} else {
@@ -68,7 +85,7 @@ public class MemberUI extends BaseUI {
 		while(true) {
 			switch(menu()) {
 			default :
-				System.out.println("잘못 입력하셨습니다.");
+				System.out.println("::잘못 입력하셨습니다.");
 				break;
 			case 1 :
 //				System.out.println("<전체 도서목록 보기>");
@@ -90,6 +107,10 @@ public class MemberUI extends BaseUI {
 //				System.out.println("<내정보 관리>");
 				ui = new MyPageUI();
 				break;
+			case 8 :
+				System.out.println("<소통게시판>");
+				ui = new RequestUI();
+				break;
 			case 9 :
 //				System.out.println("<로그아웃>");
 				ui = new LogOutUI();
@@ -102,8 +123,7 @@ public class MemberUI extends BaseUI {
 			if(ui != null) {
 				ui.run();
 			} else {
-				System.out.println("잘못 입력하셨습니다.");
-//				System.out.println("여기는 member, 호출된 ui가 없음");
+				System.out.println("::잘못 입력하셨습니다.");
 			}
 		}
 		
