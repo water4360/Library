@@ -22,7 +22,7 @@ public class ReturnBookUI extends BaseUI {
 		List<RentalVO> bookList = renService.getRentalList(MemberVO.getId());
 		
 		if(bookList.size() == 0) {
-			System.out.println("::대여중인 도서가 없습니다. 도서를 먼저 대여해보세요 :)");
+			System.out.println("::대여중인 도서가 없습니다. 흥미있는 도서를 대여해보세요 :)");
 		} else {
 			p.rentalBottom();
 			System.out.printf("\t\t\t\t\t<%s님이 대여중인 도서목록>\n", MemberVO.getId());

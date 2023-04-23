@@ -9,6 +9,7 @@ public class BookVO {
 	private String publisher;
 	private int stock;
 	private int status; // 0:대여불가, 5:대여가능
+	private int pop;
 	
 	public BookVO(int manageNo, String title, String author, String publisher, int status) {
 		super();
@@ -65,7 +66,12 @@ public class BookVO {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
+	public int getPop() {
+		return pop;
+	}
+	public void setPop(int pop) {
+		this.pop = pop;
+	}
 	
 	
 	
@@ -121,8 +127,6 @@ public class BookVO {
 //	public static void setStatus(int status) {
 //		BookVO.status = status;
 //	}
-
-
 
 
 	@Override
