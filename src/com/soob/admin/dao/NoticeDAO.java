@@ -18,10 +18,12 @@ public class NoticeDAO {
 
 	/**
 	 * 간단 공지사항 등록/삭제
+	 * 230425
+	 * 공지사항+게시판 통합작업중...!
 	 * @param notice
 	 */
 	
-	//공지 등록
+	//공지, 글등록을 통합하려면??? 번호생성 시퀀스를 별도로 해야하지 않는지!?
 	public void addNotice(String writing) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO T_NOTICE (NO, CONTENTS) ");

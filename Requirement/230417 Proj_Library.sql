@@ -1,5 +1,9 @@
---JOIN 등등
+SELECT * FROM V$VERSION;
 
+
+
+
+--JOIN 등등
 
 SELECT * FROM MEMBER;
 

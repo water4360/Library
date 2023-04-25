@@ -1,16 +1,10 @@
 package com.soob.main.ui;
 
-import java.util.List;
-
-import com.soob.member.service.MemberService;
 import com.soob.member.service.MemberServiceFactory;
 import com.soob.member.vo.MemberVO;
 
 public class JoinUI extends BaseUI {
 
-	private MemberService memService;
-	private MemberVO mem;
-	
 	public JoinUI() {
 		memService = MemberServiceFactory.getInstance();
 	}

@@ -8,11 +8,10 @@ import com.soob.main.vo.BookVO;
 
 public class SearchBookUI extends BaseUI {
 
-	private BookService service;
 	private BookVO book;
 	
 	public SearchBookUI() {
-		service = BookServiceFactory.getInstance();
+		bookService = BookServiceFactory.getInstance();
 	}
 	
 	@Override
@@ -38,7 +37,7 @@ public class SearchBookUI extends BaseUI {
 			int manageNo = scanInt("검색할 도서의 관리번호를 입력하세요 [0]취소 >> ");
 			if(manageNo == 0) return;
 			
-			book = service.searchOneByNo(manageNo);
+			book = bookService.searchOneByNo(manageNo);
 			
 			//책이 있으면?
 			if(book != null) {
@@ -58,7 +57,7 @@ public class SearchBookUI extends BaseUI {
 				System.out.println("입력취소. 메뉴를 다시 선택해주세요.");
 				return;
 			} else {
-				bookList = service.searchBooks(menu, searchWord);
+				bookList = bookService.searchBooks(menu, searchWord);
 			
 				p.printTop();
 				if(bookList == null || bookList.size() == 0) {
@@ -81,7 +80,7 @@ public class SearchBookUI extends BaseUI {
 				System.out.println("입력취소. 메뉴를 다시 선택해주세요.");
 				return;
 			} else {
-				bookList = service.searchBooks(menu, searchWord);
+				bookList = bookService.searchBooks(menu, searchWord);
 
 				p.printTop();
 

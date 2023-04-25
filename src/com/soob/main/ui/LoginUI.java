@@ -1,14 +1,12 @@
 package com.soob.main.ui;
 
 import com.soob.admin.ui.AdminUI;
-import com.soob.member.service.MemberService;
 import com.soob.member.service.MemberServiceFactory;
 import com.soob.member.ui.MemberUI;
 import com.soob.member.vo.MemberVO;
 
 public class LoginUI extends BaseUI {
 	
-	private MemberService memService;
 	private MemberUI memUi;
 	private AdminUI adminUi;
 	

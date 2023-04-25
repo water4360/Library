@@ -2,14 +2,10 @@ package com.soob.main.ui;
 
 import java.util.List;
 
-import com.soob.main.service.BookService;
 import com.soob.main.service.BookServiceFactory;
 import com.soob.main.vo.BookVO;
-import com.soob.util.PrintService;
 
 public class AllBooksUI extends BaseUI{
-	
-	private BookService bookService;
 	
 	public AllBooksUI() {
 		bookService = BookServiceFactory.getInstance();
@@ -31,11 +27,6 @@ public class AllBooksUI extends BaseUI{
 			}
 			p.printBottom();
 		}
-		
-		
-		
-		
-		
 		
 	}
 }

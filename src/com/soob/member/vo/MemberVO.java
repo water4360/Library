@@ -83,7 +83,7 @@ public class MemberVO {
 //	}
 	@Override
 	public String toString() {
-		System.out.printf("%s\t\t%s\t\t%s\t\t%s\n",
+		System.out.printf("%-10s\t\t%-10s\t\t%s\t\t%s\n",
 							id, pw, userName, userPhone);
 		return "";
 	}

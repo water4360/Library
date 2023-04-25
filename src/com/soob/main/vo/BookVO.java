@@ -133,14 +133,14 @@ public class BookVO {
 	@Override
 	public String toString() {
 		//제목을 맨 뒤로 가게 순서를 바꿔???
-//		System.out.printf("번호 도서명    저자    출판사 상태코드 대출상태");
-		System.out.printf("%d\t%-25s\t\t%-8s\t\t%-10s\t\t%-2s\t\t%4s\n"
+//		System.out.printf("번호 도서명    저자    출판사 대출상태");
+		System.out.printf("%d\t%-25s\t\t%-8s\t\t%-10s\t\t%4s\n"
 				, manageNo
 				, title
 				, author
 				, publisher
 //				, stock
-				, status
+//				, status
 				, (status == 1 ? "대출가능" : "대출불가"));
 		return "";
 	}

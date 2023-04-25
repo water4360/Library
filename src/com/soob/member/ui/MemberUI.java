@@ -17,10 +17,6 @@ import com.soob.member.vo.RentalVO;
 
 public class MemberUI extends BaseUI {
 	
-//	PrintService print = new PrintService();
-	
-	
-	
 	public MemberUI() {
 		memService = MemberServiceFactory.getInstance();
 	}

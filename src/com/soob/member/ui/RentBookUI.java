@@ -1,8 +1,5 @@
 package com.soob.member.ui;
 
-import java.text.SimpleDateFormat;
-
-import com.soob.main.service.BookService;
 import com.soob.main.service.BookServiceFactory;
 import com.soob.main.ui.BaseUI;
 import com.soob.main.vo.BookVO;
@@ -12,9 +9,6 @@ import com.soob.member.vo.RentalVO;
 
 public class RentBookUI extends BaseUI {
 
-	private BookService bookService;
-	private BookVO book;
-	private RentalService renService;
 	private RentalVO ren;
 	
 	public RentBookUI() {
@@ -75,7 +69,6 @@ public class RentBookUI extends BaseUI {
 //						System.out.printf("(대여기간 : 3일, 반납기한 : %s)\n");
 						System.out.printf("(대여기간 : 3일, 반납기한 : %s)\n", renService.getDueDate(bookNo));
 					}
-					
 				}
 			}
 		} else {

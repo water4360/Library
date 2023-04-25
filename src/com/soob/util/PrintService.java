@@ -26,7 +26,7 @@ public class PrintService {
 
 	public void memTop() {
 		System.out.println("―".repeat(130));
-		System.out.println("ID\t\tPW\t\t이름\t\t연락처");
+		System.out.println("ID\t\t\tPW\t\t\t이름\t\t연락처");
 		System.out.println("―".repeat(130));
 	}
 
