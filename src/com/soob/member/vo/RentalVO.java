@@ -83,7 +83,8 @@ public class RentalVO {
 				, publisher
 				, renDate
 				, dueDate
-				, overdueDay);
+				, overdueDay
+				);
 		return "";
 //		System.out.printf("도서명:%s  저자명:%s   반납예정일:%s"
 //					, Title()

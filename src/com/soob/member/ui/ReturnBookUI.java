@@ -20,7 +20,7 @@ public class ReturnBookUI extends BaseUI {
 	@Override
 	public void run() throws Exception {
 		List<RentalVO> bookList = renService.getRentalList(MemberVO.getId());
-		
+		renService.calOverdue(MemberVO.getId());
 		if(bookList.size() == 0) {
 			System.out.println("::대여중인 도서가 없습니다. 흥미있는 도서를 대여해보세요 :)");
 			System.out.println();

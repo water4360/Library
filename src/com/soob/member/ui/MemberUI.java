@@ -28,13 +28,14 @@ public class MemberUI extends BaseUI {
 		System.out.printf("\t\t\t\t\t%s님 접속중 (%s)\n",MemberVO.getId(), now);
 		p.printBottom();
 		
+		//업뎃 먼저하고 리스트 가져오기
+		renService.calOverdue(MemberVO.getId());
 		List<RentalVO> bookList = renService.getRentalList(MemberVO.getId());
 		if(bookList.size() == 0) {
 			System.out.println("::대여중인 도서가 없습니다. 흥미있는 도서를 대여해보세요 :)");
 			System.out.println();
 		} else {
 			System.out.printf("\t\t\t\t\t<내가 대여중인 도서목록>\n", MemberVO.getId());
-			
 			p.rentalTop();
 			for(RentalVO ren : bookList) {
 				System.out.print(ren);
@@ -71,7 +72,7 @@ public class MemberUI extends BaseUI {
 		}
 		System.out.print("메뉴를 선택하세요 >> ");
 		
-		Scanner sc = new Scanner(System.in);
+//		Scanner sc = new Scanner(System.in);
 		return Integer.parseInt(sc.nextLine());
 	}
 

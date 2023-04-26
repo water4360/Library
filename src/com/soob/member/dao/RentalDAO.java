@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.soob.main.service.BookService;
-import com.soob.member.service.RentalService;
 import com.soob.member.vo.MemberVO;
 import com.soob.member.vo.RentalVO;
 import com.soob.util.ConnectionFactory;
@@ -23,14 +22,13 @@ import com.soob.util.ConnectionFactory;
 public class RentalDAO {
 	
 	private BookService service;
-	private RentalService renService;
 	private RentalVO ren;
 	
 	//대여정보 등록
 	public RentalVO addRental(String id, int bookNo) {
-		service = new BookService();
 		service.searchOneByNo(bookNo);
-		
+
+		//여기서는 렌탈 정보 등록해주고
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO T_RENTAL(NO, TITLE, AUTHOR, PUBLISHER, RENT_ID) ");
 		sql.append("            VALUES(?, ?, ?, ?, ?) ");
@@ -48,25 +46,72 @@ public class RentalDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+			
+			//여기서는 연체일수 "첫"계산 해주고.
+			sql = new StringBuilder();
+			sql.append("UPDATE T_RENTAL SET OVERDUE_STATE = ROUND(DUE_DATE - SYSDATE) ");
+			sql.append(" WHERE RENT_ID = ? ");
+			
+			try(
+					Connection conn = new ConnectionFactory().getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+			) {
+				pstmt.setString(1, id);
+//				pstmt.setInt(2, bookNo);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return ren;
+	}
 		
-		//Overdue 날짜 업뎃!!!
-		sql = new StringBuilder();
-		sql.append("UPDATE T_RENTAL SET OVERDUE_STATE = ROUND(DUE_DATE - SYSDATE) WHERE RENT_ID = ? ");
-		sql.append(" AND NO = ? ");
 		
+//	//연체일자 계산한 대여상태 반환
+//	public RentalVO checkRental(String id, int bookNo) {
+//		service.searchOneByNo(bookNo);
+//		// 날짜 업뎃기능 대출조회시에 넣기 !!!!!!!!!!!!!!!!!!!
+//		//Overdue 날짜 업뎃!!!
+//		StringBuilder sql = new StringBuilder();
+//		sql.append("UPDATE T_RENTAL SET OVERDUE_STATE = ROUND(DUE_DATE - SYSDATE) ");
+//		sql.append(" WHERE NO = ? ");
+//		
+//		try(
+//				Connection conn = new ConnectionFactory().getConnection();
+//				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+//		) {
+//			pstmt.setString(1, id);
+//			pstmt.setInt(2, bookNo);
+//			pstmt.executeUpdate();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return ren;
+//	}
+	
+	
+	//연체일수 계산
+	public void calOverdue(String id) {
+		StringBuilder sql = new StringBuilder();
+		//연체현황 업데이트 먼저 해주고
+		sql.append("UPDATE T_RENTAL SET OVERDUE_STATE = ROUND(DUE_DATE - SYSDATE) ");
+		sql.append(" WHERE RENT_ID = ? ");
 		try(
 				Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 		) {
 			pstmt.setString(1, id);
-			pstmt.setInt(2, bookNo);
+			
 			pstmt.executeUpdate();
+//			if(cnt == 0) {
+//				System.out.println("여기는 RentalDAO, 업뎃된게 없음");
+//			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		return ren;
 	}
+	
 	
 	
 	
@@ -77,6 +122,7 @@ public class RentalDAO {
 			SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
 			
 			StringBuilder sql = new StringBuilder();
+			//그리고 나서 회원대여 리스트 보여주기
 			sql.append("SELECT * FROM T_RENTAL WHERE RENT_ID = ? ");
 			try(
 					Connection conn = new ConnectionFactory().getConnection();

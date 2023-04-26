@@ -40,6 +40,11 @@ public class RentalService {
 	public int getOverDue(int bookNo) {
 		return renDao.getOverDue(bookNo);
 	}
+	
+	//연체일수 반영이 필요한 것임.
+	public void calOverdue(String id) {
+		renDao.calOverdue(id);
+	}
 
 	
 }

@@ -7,7 +7,6 @@ public class BookVO {
 	private String title;
 	private String author;
 	private String publisher;
-	private int stock;
 	private int status; // 0:대여불가, 1:대여가능
 	private int pop;
 	
@@ -52,13 +51,6 @@ public class BookVO {
 	}
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
-	}
-
-	public int getStock() {
-		return stock;
-	}
-	public void setStock(int stock) {
-		this.stock = stock;
 	}
 
 	public int getStatus() {

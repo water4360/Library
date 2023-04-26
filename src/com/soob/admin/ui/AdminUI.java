@@ -64,27 +64,30 @@ public class AdminUI extends BaseUI	{
 			case 1 :
 //				System.out.println("<신규도서 등록>");
 				System.out.println("::도서명, 저자명, 출판사명을 입력하여 신규도서를 등록할 수 있어요.");
+				System.out.println();
 				ui = new AddUI();
 				break;
 			case 2 :
 //				System.out.println("<기존도서 수정>");
 				System.out.println("::도서번호로 검색하여 도서명, 저자명, 출판사 정보를 수정할 수 있어요.");
+				System.out.println();
 				ui = new ModifyBookUI();
 				break;
 			case 3 :
 //				System.out.println("<기존도서 삭제>");
 				System.out.println("::도서번호로 검색하여 도서를 삭제할 수 있어요.");
+				System.out.println();
 				ui = new DeleteBookUI();
 				break;
 			case 4 :
 //				System.out.println("<전체 도서목록>");
 				System.out.println("::현재 도서관에서 보유중인 전체 도서목록을 확인할 수 있어요.");
-//				ui = new AllBooksUI();
+				System.out.println();
 				ui = new AllBooksUI();
 				break;
 			case 5 :
 				System.out.println("::회원이 남긴 글을 조회하고 관리할 수 있어요.");
-//				System.out.println("<소통게시판>");
+				System.out.println();
 				ui = new RequestUI();
 				break;
 			case 8 :
@@ -101,6 +104,7 @@ public class AdminUI extends BaseUI	{
 				break;
 			default :
 				System.out.println("::존재하지 않는 메뉴입니다. 다시 입력해주세요.");
+				System.out.println();
 				break;
 			}
 			if(ui != null) {

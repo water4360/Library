@@ -19,8 +19,8 @@ public class SearchBookUI extends BaseUI {
 		int menu = 0;
 		
 		try {
-			menu = scanInt("[1]관리번호 [2]도서명 [3]저자명\n"
-					+ "도서 검색 방법을 선택하세요 >> ");
+			menu = Integer.parseInt(scanStr("[1]관리번호 [2]도서명 [3]저자명\n"
+					+ "도서 검색 방법을 선택하세요 >> "));
 		} catch (Exception e) {
 			System.out.println("::잘못된 입력입니다. 다시 입력해주세요.");
 			run();
@@ -28,13 +28,14 @@ public class SearchBookUI extends BaseUI {
 		String searchWord;
 		List<BookVO> bookList; 
 		
+		int manageNo = 0;
 		switch(menu) {
-		default :
-			System.out.println("::해당 메뉴는 존재하지 않아요.");
-			break;
 		case 1 : 
-			//도서번호로 검색하는 경우
-			int manageNo = scanInt("검색할 도서의 관리번호를 입력하세요 [0]취소 >> ");
+			try {
+				manageNo = Integer.parseInt(scanStr("검색할 도서의 관리번호를 입력하세요 [0]취소 >> "));
+				System.out.println("::잘못된 입력입니다. 다시 입력해주세요.");
+			} catch (Exception e) {
+			}
 			if(manageNo == 0) return;
 			
 			book = bookService.searchOneByNo(manageNo);
@@ -77,7 +78,7 @@ public class SearchBookUI extends BaseUI {
 			//저자명으로 검색하는 경우
 			searchWord = scanStr("검색할 저자명을 입력하세요(취소:0) >> ");
 			if(searchWord.equals("0")) {
-				System.out.println("입력취소. 메뉴를 다시 선택해주세요.");
+				System.out.println("::입력취소. 메뉴를 다시 선택해주세요.");
 				return;
 			} else {
 				bookList = bookService.searchBooks(menu, searchWord);
@@ -95,6 +96,10 @@ public class SearchBookUI extends BaseUI {
 				}
 				p.printBottom();
 			}
+			break;
+		default :
+			System.out.println("::해당 메뉴는 존재하지 않아요.");
+			System.out.println();
 			break;
 		}
 		

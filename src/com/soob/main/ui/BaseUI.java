@@ -13,7 +13,7 @@ import com.soob.util.PrintService;
 public abstract class BaseUI implements IMainUI{
 
 	//스캐너 상속용도 + ui들 묶어주기
-	private Scanner sc;
+	protected Scanner sc;
 	protected PrintService p;
 	protected BookService bookService;
 	protected MemberService memService;

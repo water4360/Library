@@ -53,13 +53,14 @@ public class RentBookUI extends BaseUI {
 					//대출 권수는 최대 2권. 2권 넘어가면 반납하도록.
 					if(renService.getRentalList(MemberVO.getId()).size()>=2) {
 						System.out.println("::최대 대여권수는 2권이에요. 다른 책을 먼저 반납해주세요.");
+						System.out.println();
 						new ReturnBookUI().run();
 					
 					//대여 가능한 상황이면?
 					} else {
 						//RENTAL테이블에 대출정보 추가
 						renService.addRental(MemberVO.getId(), bookNo);
-						
+//						renService.updateRental(MemberVO.getId(), bookNo);
 						//BOOKLIST테이블에 대출불가(0) 추가
 						//RENTAL 테이블에 회원정보(ID) 추가
 						bookService.changeStatus(0, bookNo);
