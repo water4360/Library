@@ -2,7 +2,6 @@ package com.soob.main.ui;
 
 import java.util.List;
 
-import com.soob.main.service.BookService;
 import com.soob.main.service.BookServiceFactory;
 import com.soob.main.vo.BookVO;
 
@@ -19,8 +18,8 @@ public class SearchBookUI extends BaseUI {
 		int menu = 0;
 		
 		try {
-			menu = Integer.parseInt(scanStr("[1]관리번호 [2]도서명 [3]저자명\n"
-					+ "도서 검색 방법을 선택하세요 >> "));
+			menu = scanInt("[1]도서번호 [2]도서명 [3]저자명\n"
+					+ "도서 검색방법을 선택하세요 >> ");
 		} catch (Exception e) {
 			System.out.println("::잘못된 입력입니다. 다시 입력해주세요.");
 			run();
@@ -32,9 +31,9 @@ public class SearchBookUI extends BaseUI {
 		switch(menu) {
 		case 1 : 
 			try {
-				manageNo = Integer.parseInt(scanStr("검색할 도서의 관리번호를 입력하세요 [0]취소 >> "));
-				System.out.println("::잘못된 입력입니다. 다시 입력해주세요.");
+				manageNo = scanInt("검색할 도서의 도서번호를 입력하세요 [0]취소 >> ");
 			} catch (Exception e) {
+				System.out.println("::잘못된 입력입니다. 다시 입력해주세요.");
 			}
 			if(manageNo == 0) return;
 			
@@ -55,7 +54,8 @@ public class SearchBookUI extends BaseUI {
 			//제목으로 검색하는 경우
 			searchWord = scanStr("검색할 도서명을 입력하세요 [0]취소 >> ");
 			if(searchWord.equals("0")) {
-				System.out.println("입력취소. 메뉴를 다시 선택해주세요.");
+				System.out.println("::입력취소. 메뉴를 다시 선택해주세요.");
+				System.out.println();
 				return;
 			} else {
 				bookList = bookService.searchBooks(menu, searchWord);
@@ -76,9 +76,10 @@ public class SearchBookUI extends BaseUI {
 			
 		case 3 :
 			//저자명으로 검색하는 경우
-			searchWord = scanStr("검색할 저자명을 입력하세요(취소:0) >> ");
+			searchWord = scanStr("검색할 저자명을 입력하세요 [0]취소 >> ");
 			if(searchWord.equals("0")) {
 				System.out.println("::입력취소. 메뉴를 다시 선택해주세요.");
+				System.out.println();
 				return;
 			} else {
 				bookList = bookService.searchBooks(menu, searchWord);

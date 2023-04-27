@@ -66,61 +66,6 @@ public class BookVO {
 		this.pop = pop;
 	}
 	
-	
-	
-//	public BookVO(int manageNo, String title, String author, String publisher, int status) {
-//		super();
-//		BookVO.manageNo = manageNo;
-//		BookVO.title = title;
-//		BookVO.author = author;
-//		BookVO.publisher = publisher;
-////		BookVO.stock = stock;
-//		BookVO.status = status;
-//	}
-//
-//	
-//	public static int getManageNo() {
-//		return manageNo;
-//	}
-//	public static void setManageNo(int manageNo) {
-//		BookVO.manageNo = manageNo;
-//	}
-//
-//	public static String getTitle() {
-//		return title;
-//	}
-//	public static void setTitle(String title) {
-//		BookVO.title = title;
-//	}
-//
-//	public static String getAuthor() {
-//		return author;
-//	}
-//	public static void setAuthor(String author) {
-//		BookVO.author = author;
-//	}
-//
-//	public static String getPublisher() {
-//		return publisher;
-//	}
-//	public static void setPublisher(String publisher) {
-//		BookVO.publisher = publisher;
-//	}
-//
-//	public static int getStock() {
-//		return stock;
-//	}
-//	public static void setStock(int stock) {
-//		BookVO.stock = stock;
-//	}
-//
-//	public static int getStatus() {
-//		return status;
-//	}
-//	public static void setStatus(int status) {
-//		BookVO.status = status;
-//	}
-
 
 	@Override
 	public String toString() {

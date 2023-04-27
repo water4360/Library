@@ -4,5 +4,5 @@ import com.soob.main.vo.BookVO;
 
 public interface IModifyQuery {
 	
-	public void modify(BookVO book, int menu, int searchNo, String str);
+	public void modify(BookVO book, int menu, int searchNo, String str) throws Exception;
 }

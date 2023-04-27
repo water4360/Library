@@ -45,6 +45,11 @@ public class RentalService {
 	public void calOverdue(String id) {
 		renDao.calOverdue(id);
 	}
+	
+	//수정된 내용 반영하기
+	public void updateBook(int menu, int bookNo, String str) throws Exception {
+		renDao.updateBook(menu, bookNo, str);
+	}
 
 	
 }

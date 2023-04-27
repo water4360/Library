@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.soob.main.service.BookService;
+import com.soob.main.service.BookServiceFactory;
 import com.soob.member.vo.MemberVO;
 import com.soob.member.vo.RentalVO;
 import com.soob.util.ConnectionFactory;
@@ -26,6 +27,7 @@ public class RentalDAO {
 	
 	//대여정보 등록
 	public RentalVO addRental(String id, int bookNo) {
+		service = BookServiceFactory.getInstance();
 		service.searchOneByNo(bookNo);
 
 		//여기서는 렌탈 정보 등록해주고
@@ -101,7 +103,6 @@ public class RentalDAO {
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 		) {
 			pstmt.setString(1, id);
-			
 			pstmt.executeUpdate();
 //			if(cnt == 0) {
 //				System.out.println("여기는 RentalDAO, 업뎃된게 없음");
@@ -124,6 +125,7 @@ public class RentalDAO {
 			StringBuilder sql = new StringBuilder();
 			//그리고 나서 회원대여 리스트 보여주기
 			sql.append("SELECT * FROM T_RENTAL WHERE RENT_ID = ? ");
+			sql.append("ORDER BY OVERDUE_STATE ");
 			try(
 					Connection conn = new ConnectionFactory().getConnection();
 					PreparedStatement pstmt = conn.prepareStatement(sql.toString());
@@ -222,6 +224,66 @@ public class RentalDAO {
 			e.printStackTrace();
 		}
 		return -99;
+	}
+
+	//기존테이블에서 조인해서 가져오는 경우에는...
+	
+	public void updateBook(int menu, int bookNo, String str) throws Exception{
+		StringBuilder sql = new StringBuilder();
+		//연체현황 업데이트 먼저 해주고
+		
+		switch(menu) {
+			//도서명
+			case 1 :
+				sql.append("UPDATE T_RENTAL SET TITLE = ? ");
+				sql.append(" WHERE NO = ? ");
+				try(
+						Connection conn = new ConnectionFactory().getConnection();
+						PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) {
+					pstmt.setString(1, str);
+					pstmt.setInt(2, bookNo);
+					pstmt.executeUpdate();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+			//저자명
+			case 2 : 
+				sql.append("UPDATE T_RENTAL SET AUTHOR = ? ");
+				sql.append(" WHERE NO = ? ");
+				try(
+						Connection conn = new ConnectionFactory().getConnection();
+						PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) {
+					pstmt.setString(1, str);
+					pstmt.setInt(2, bookNo);
+					pstmt.executeUpdate();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+			//출판사명
+			case 3 :
+				sql.append("UPDATE T_RENTAL SET PUBLISHER = ? ");
+				sql.append(" WHERE NO = ? ");
+				try(
+						Connection conn = new ConnectionFactory().getConnection();
+						PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) {
+					pstmt.setString(1, str);
+					pstmt.setInt(2, bookNo);
+					pstmt.executeUpdate();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+		}
+		
+
+
+			
+
 	}
 	
 	

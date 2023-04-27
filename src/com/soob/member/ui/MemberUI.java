@@ -15,7 +15,7 @@ import com.soob.member.service.MemberServiceFactory;
 import com.soob.member.vo.MemberVO;
 import com.soob.member.vo.RentalVO;
 
-public class MemberUI extends BaseUI {
+public class MemberUI extends BaseUI{
 	
 	public MemberUI() {
 		memService = MemberServiceFactory.getInstance();
@@ -55,7 +55,7 @@ public class MemberUI extends BaseUI {
 	
 	
 	public int menu() {
-		
+		int menu = 0;
 		//정상적인 로그인상태
 		if(MemberVO.getId()!=null) {
 			System.out.print("[1]전체도서보기  ");
@@ -70,10 +70,14 @@ public class MemberUI extends BaseUI {
 			System.out.println("::비정상적인 접근입니다. 첫 화면으로 돌아갑니다.");
 			LibraryMain.main(null);
 		}
-		System.out.print("메뉴를 선택하세요 >> ");
+		try {
+			menu = scanInt("메뉴를 선택하세요 >> ");
+		} catch (Exception e) {
+			System.out.println("::잘못된 입력입니다.");
+			menu();
+		}
 		
-//		Scanner sc = new Scanner(System.in);
-		return Integer.parseInt(sc.nextLine());
+		return menu;
 	}
 
 	@Override

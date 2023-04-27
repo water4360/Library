@@ -75,8 +75,8 @@ public class RentalVO {
 	}
 	@Override
 	public String toString() {
-						// no  title   aut    pub    ren  due
-		System.out.printf("%d\t%-25s\t\t%s\t\t%-4s\t\t%s\t%4s\t%s\n"
+						// no  title    aut     pub  ren due overdue
+		System.out.printf("%d\t%-25s\t\t%-8s\t\t%-10s\t%s    %4s    %s\n"
 				, bookNo
 				, title
 				, author

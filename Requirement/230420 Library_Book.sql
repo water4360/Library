@@ -13,7 +13,7 @@ SELECT * FROM BOOKLIST;
 
 --데이터 등록
 INSERT INTO BOOKLIST(NO, TITLE, AUTHOR, PUBLISHER)
-            VALUES(SEQ_BOOKLIST_NO.NEXTVAL, '우리가 빛의 속도로 갈 수 없다면', '김초엽', '허블');
+            VALUES(230009, '우리가 빛의 속도로 갈 수 없다면', '김초엽', '허블');
 
 
 UPDATE BOOKLIST SET STATUS = '1';

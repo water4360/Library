@@ -11,8 +11,10 @@ public class LogOutUI extends BaseUI {
 	public void run() throws Exception {
 		int answer = 9;
 		try {
-			if(MemberVO.getId()!=null)
+			if(MemberVO.getId()!=null) {
 				System.out.println(MemberVO.getId()+"님, 로그아웃 완료!");
+				System.out.println();
+			}
 			
 			answer = scanInt("[0]프로그램 종료 [1]첫화면으로 돌아가기 >> ");
 		} catch (Exception e) {
